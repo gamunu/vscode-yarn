@@ -6,7 +6,7 @@
   "publisher": "gamunu",
   "icon": "yarn_icon.png",
   "engines": {
-		"vscode": "^1.5.0"
+    "vscode": "^1.5.0"
   },
   "categories": [
     "Other"
@@ -99,16 +99,17 @@
     ]
   },
   "scripts": {
-		"vscode:prepublish": "tsc -p ./",
-		"compile": "tsc -watch -p ./",
-		"postinstall": "node ./node_modules/vscode/bin/install"
+    "vscode:prepublish": "tsc -p ./",
+    "compile": "tsc -watch -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install"
   },
   "devDependencies": {
-		"typescript": "^2.1.4",
-		"vscode": "^1.0.0",
-		"@types/node": "*"
+    "@types/node": "*",
+    "typescript": "^2.2.1",
+    "vscode": "^1.0.0"
   },
   "dependencies": {
+    "global": "^4.3.1",
     "tree-kill": "^1.0.0"
   }
 }
