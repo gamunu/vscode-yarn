@@ -6,7 +6,7 @@
   "publisher": "gamunu",
   "icon": "yarn_icon.png",
   "engines": {
-    "vscode": "^0.10.8"
+		"vscode": "^1.5.0"
   },
   "categories": [
     "Other"
@@ -103,8 +103,9 @@
     "compile": "node ./node_modules/vscode/bin/compile -watch -p ./"
   },
   "devDependencies": {
-    "typescript": "^1.7.5",
-    "vscode": "^0.11.x"
+		"typescript": "^2.1.4",
+		"vscode": "^1.0.0",
+		"@types/node": "*"
   },
   "dependencies": {
     "tree-kill": "^1.0.0"
