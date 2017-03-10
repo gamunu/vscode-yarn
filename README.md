@@ -1,4 +1,3 @@
-VSCode extensions to manage yarn commands. This repo is inspired by the [fknop vscode-npm](https://github.com/fknop/vscode-npm) sample.
 
 ## Commands available
 
