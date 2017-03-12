@@ -1,3 +1,4 @@
+VSCode extensions to manage yarn commands.
 
 ## Commands available
 
@@ -25,3 +26,5 @@ It has different behaviors on Unix or Windows.
 ## Contribute
 
 Report a bug or a suggestion by posting an issue on the git repository (https://github.com/gamunu/vscode-yarn).
+
+vscode-yarn incorporates code modified from [fknop vscode-npm](https://github.com/fknop/vscode-npm).
