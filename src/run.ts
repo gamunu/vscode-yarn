@@ -70,8 +70,14 @@ export function yarnRunLastScript () {
 }
 
 const readScripts = function () {
-  
-    const filename = Path.join(Workspace.rootPath, 'package.json');
+
+    let filename = Path.join(Workspace.rootPath, 'package.json');
+
+    let editor = Window.activeTextEditor;
+    if (editor && editor.document.fileName.endsWith("package.json")) {
+        filename = editor.document.fileName
+    }
+
     try {
         const content = Fs.readFileSync(filename).toString();
         const json = JSON.parse(content);

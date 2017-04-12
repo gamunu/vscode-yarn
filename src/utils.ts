@@ -1,16 +1,22 @@
 import * as Fs from 'fs';
 import * as Path from 'path';
 
-import { workspace as Workspace } from 'vscode';
+import { workspace as Workspace, window } from 'vscode';
 
-export function packageExists () {
-    
+export function packageExists() {
+
     if (!Workspace.rootPath) {
         return false;
     }
 
+    let filename = Path.join(Workspace.rootPath, 'package.json');
+
+    let editor = window.activeTextEditor;
+    if (editor && editor.document.fileName.endsWith("package.json")) {
+        filename = editor.document.fileName;
+    }
+
     try {
-        const filename = Path.join(Workspace.rootPath, 'package.json');
         const stat = Fs.statSync(filename);
         return stat && stat.isFile();
     }
