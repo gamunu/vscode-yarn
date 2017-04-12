@@ -62,7 +62,8 @@ const _addPackage = function (dev) {
             runCommand(args);
         }
         else {
-            runCommand([...args, "--dev"])
+            const save = dev ? '--dev' : '';
+            runCommand([...args, save])
         }
     });
 };

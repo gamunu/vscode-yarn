@@ -3,3 +3,4 @@ node_modules
 *.vsix
 *.lock
 npm-debug.log
+.vs
