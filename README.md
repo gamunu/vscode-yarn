@@ -23,7 +23,7 @@ You can also run the last executed script by typing `yarn run last...`.
 You can terminate a script with the `terminate` command. It uses the `tree-kill` module that you can find on `yarn`.
 It has different behaviors on Unix or Windows. 
 
-## Order of yarn execution
+## Order of execution of yarn commands
 
 01. If a package.json is opened as an active editor/focused tab yarn will be invoked on it.
 02. If the above scenario fails to satisfy it will fallback to package.json in project root folder.

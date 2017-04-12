@@ -1,6 +1,6 @@
 ## 1.1.0 - 12th April, 2017
 
-* Changed yarn execution behavior,
+* Changed yarn commands execution behavior,
 Fix for [Issue 1](https://github.com/gamunu/vscode-yarn/issues/1)
 
 01. If a package.json is opened as an active editor yarn will be invoked on it.
