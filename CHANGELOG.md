@@ -1,3 +1,9 @@
+## 1.2.0 - 11th May, 2017
+
+* Two new workspace settings
+  * yarn.runInTerminal (default false), this will execute commands on a terminal window.
+  * yarn.bin (default env Yarn bin path), this can be used to set a custom Yarn location.
+
 ## 1.1.0 - 12th April, 2017
 
 * Changed yarn commands execution behavior,

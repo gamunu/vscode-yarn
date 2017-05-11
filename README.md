@@ -28,6 +28,18 @@ It has different behaviors on Unix or Windows.
 01. If a package.json is opened as an active editor/focused tab yarn will be invoked on it.
 02. If the above scenario fails to satisfy it will fallback to package.json in project root folder.
 
+## Settings
+- `yarn.runInTerminal` defines whether the command is run
+in a terminal window or whether the output form the command is shown in the `Output` window. The default is to show the output in the terminal.
+- `yarn.bin` custom npm bin name, the default is `yarn`.
+
+##### Example
+```javascript
+{
+	"yarn.runInTerminal": false
+}
+```
+
 ## Contribute
 
 Report a bug or a suggestion by posting an issue on the git repository (https://github.com/gamunu/vscode-yarn).

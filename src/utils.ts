@@ -1,10 +1,8 @@
 import * as Fs from 'fs';
 import * as Path from 'path';
-
 import { workspace as Workspace, window } from 'vscode';
 
 export function packageExists() {
-
     if (!Workspace.rootPath) {
         return false;
     }
@@ -25,3 +23,10 @@ export function packageExists() {
     }
 };
 
+export function useTerminal() {
+    return Workspace.getConfiguration('yarn')['runInTerminal'];
+}
+
+export function getYarnBin() {
+    return Workspace.getConfiguration('yarn')['bin'] || 'yarn';
+}

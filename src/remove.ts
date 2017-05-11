@@ -1,13 +1,9 @@
-
 import { window as Window } from 'vscode';
-
 import { packageExists } from './utils';
 import * as Messages from './messages';
 import { runCommand } from './run-command';
 
-
 export function yarnRemovePackage() {
-
     return _removePackage();
 };
 

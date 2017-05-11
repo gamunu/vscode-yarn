@@ -2,7 +2,7 @@
   "name": "vscode-yarn",
   "displayName": "yarn",
   "description": "yarn commands for VSCode",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "publisher": "gamunu",
   "icon": "yarn_icon.png",
   "engines": {
@@ -100,6 +100,22 @@
       }
     ]
   },
+  "configuration": {
+    "type": "object",
+    "title": "yarn VSCode Yarn",
+    "properties": {
+      "yarn.runInTerminal": {
+        "type": "boolean",
+        "default": true,
+        "description": "Run yarn commands in a terminal, otherwise shows the output in the output panel"
+      },
+      "yarn.bin": {
+        "type": "string",
+        "default": "yarn",
+        "description": "yarn bin name"
+      }
+    }
+  },
   "scripts": {
     "vscode:prepublish": "tsc -p ./",
     "compile": "tsc -watch -p ./",
@@ -111,7 +127,8 @@
     "vscode": "^1.1.0"
   },
   "dependencies": {
-    "global": "^4.3.1",
-    "tree-kill": "^1.1.0"
+    "global": "^4.3.2",
+    "tree-kill": "^1.1.0",
+    "run-in-terminal": "^0.0.3"
   }
 }

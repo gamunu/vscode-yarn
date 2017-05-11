@@ -1,9 +1,7 @@
 import { commands as Commands, ExtensionContext } from 'vscode';
-
 import { outputChannel } from './output';
 import * as Messages from './messages';
-import { runCommand } from './run-command';
-
+import { runCommand, terminal } from './run-command';
 import yarnInit from './init';
 import { yarnInstallPackages } from './install';
 import { yarnAddPackages, yarnAddPackage, yarnAddPackageDev } from './add';
@@ -14,7 +12,6 @@ import { yarnRawCommand } from './raw';
 import yarnTerminate from './terminate';
 
 export const activate = function (context: ExtensionContext) {
-
     const disposables = [
         Commands.registerCommand('yarn-script.installPackages', yarnInstallPackages),  
         Commands.registerCommand('yarn-script.addPackages', yarnAddPackages),
@@ -32,4 +29,10 @@ export const activate = function (context: ExtensionContext) {
     ];
     
 	context.subscriptions.push(...disposables, outputChannel);
+}
+
+export function deactivate() {
+	if (terminal) {
+		terminal.dispose();
+	}
 }
