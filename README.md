@@ -1,4 +1,10 @@
-VSCode extensions to manage yarn commands.
+<p align="center">
+  <img src="yarn_icon.png?raw=true" alt="vscode-yarn: VSCode extensions to manage yarn commands." width="150">
+  <br>
+  <a href="https://github.com/gamunu/vscode-yarn/releases/latest"><img src="https://img.shields.io/github/release/gamunu/vscode-yarn.svg" alt="Releases"></a>
+  <a href="https://github.com/gamunu/vscode-yarn/issues"><img src="https://img.shields.io/github/issues/gamunu/vscode-yarn.svg" alt="Issues"></a>
+</p>
+<p align="center">VSCode-Yarn: VSCode extensions to manage yarn commands.</p>
 
 ## Commands available
 
