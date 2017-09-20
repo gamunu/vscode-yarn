@@ -3,6 +3,7 @@ import { workspace as Workspace, ViewColumn, window, Terminal } from 'vscode';
 import { outputChannel } from './output';
 import { runInTerminal, Options } from 'run-in-terminal';
 import { useTerminal, getYarnBin } from './utils'
+import * as Path from 'path';
 
 const kill = require('tree-kill');
 export let terminal: Terminal = null;
@@ -28,6 +29,12 @@ export function terminate(pid) {
 
 export function runCommand(args: string[]) {
     let cwd = Workspace.rootPath
+
+    let confPackagejson = Workspace.getConfiguration('yarn')['packageJson']
+    
+    if (confPackagejson) {
+        cwd =  Path.join(Workspace.rootPath, confPackagejson).replace(/package.json$/i, "");
+    }
 
     let editor = window.activeTextEditor;
     if (editor && editor.document.fileName.endsWith("package.json")) {

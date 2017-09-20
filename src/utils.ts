@@ -8,6 +8,11 @@ export function packageExists() {
     }
 
     let filename = Path.join(Workspace.rootPath, 'package.json');
+    let confPackagejson = Workspace.getConfiguration('yarn')['packageJson']
+
+    if (confPackagejson) {
+        filename = Path.join(Workspace.rootPath, confPackagejson)
+    }
 
     let editor = window.activeTextEditor;
     if (editor && editor.document.fileName.endsWith("package.json")) {

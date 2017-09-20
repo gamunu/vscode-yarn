@@ -1,3 +1,8 @@
+## 1.3.0 - 11th September, 2017
+
+* New workspace settings
+  * yarn.packageJson (default "") specify a default package json file path. relative to current project root
+
 ## 1.2.0 - 11th May, 2017
 
 * Two new workspace settings

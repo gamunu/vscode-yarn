@@ -64,6 +64,11 @@ export function yarnRunLastScript() {
 
 const readScripts = function () {
     let filename = Path.join(Workspace.rootPath, 'package.json');
+    let confPackagejson = Workspace.getConfiguration('yarn')['packageJson']
+    
+    if (confPackagejson) {
+        filename =  Path.join(Workspace.rootPath, confPackagejson)
+    }
 
     let editor = Window.activeTextEditor;
     if (editor && editor.document.fileName.endsWith("package.json")) {

@@ -2,7 +2,7 @@
   "name": "vscode-yarn",
   "displayName": "yarn",
   "description": "yarn commands for VSCode",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "publisher": "gamunu",
   "icon": "yarn_icon.png",
   "engines": {
@@ -123,12 +123,12 @@
   },
   "devDependencies": {
     "@types/node": "*",
-    "typescript": "^2.2.2",
-    "vscode": "^1.1.0"
+    "typescript": "^2.5.2",
+    "vscode": "^1.1.5"
   },
   "dependencies": {
     "global": "^4.3.2",
-    "tree-kill": "^1.1.0",
+    "tree-kill": "^1.2.0",
     "run-in-terminal": "^0.0.3"
   }
 }

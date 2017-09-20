@@ -49,7 +49,7 @@ export default function () {
         .then((value) => {
 
             if (value) {
-                options.version = value;
+                options.version = value.toString();
             }
 
             return Window.showInputBox({
@@ -60,7 +60,7 @@ export default function () {
         .then((value) => {
 
             if (value) {
-                options.description = value;
+                options.description = value.toString();
             }
 
             return Window.showInputBox({
@@ -71,7 +71,7 @@ export default function () {
         .then((value) => {
 
             if (value) {
-                options.main = value;
+                options.main = value.toString();
             }
 
             return Window.showInputBox({
@@ -81,7 +81,7 @@ export default function () {
         .then((value) => {
 
             if (value) {
-                options.scripts.test = value;
+                options.scripts.test = value.toString();
             }
 
             return Window.showInputBox({
@@ -91,7 +91,7 @@ export default function () {
         .then((value) => {
 
             if (value) {
-                options.author = value;
+                options.author = value.toString();
             }
 
             return Window.showInputBox({
@@ -102,7 +102,7 @@ export default function () {
         .then((value) => {
 
             if (value) {
-                options.license = value;
+                options.license = value.toString();
             }
 
             const packageJson = JSON.stringify(options, null, 4);

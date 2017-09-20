@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="yarn_icon.png?raw=true" alt="vscode-yarn: VSCode extensions to manage yarn commands." width="150">
+  <img src="https://raw.githubusercontent.com/gamunu/vscode-yarn/master/yarn_icon.png?raw=true" alt="vscode-yarn: VSCode extensions to manage yarn commands." width="150">
   <br>
   <a href="https://github.com/gamunu/vscode-yarn/releases/latest"><img src="https://img.shields.io/github/release/gamunu/vscode-yarn.svg" alt="Releases"></a>
   <a href="https://github.com/gamunu/vscode-yarn/issues"><img src="https://img.shields.io/github/issues/gamunu/vscode-yarn.svg" alt="Issues"></a>
@@ -32,17 +32,20 @@ It has different behaviors on Unix or Windows.
 ## Order of execution of yarn commands
 
 01. If a package.json is opened as an active editor/focused tab yarn will be invoked on it.
-02. If the above scenario fails to satisfy it will fallback to package.json in project root folder.
+02. If the package.json is explicitly defined in the configuration yarn will invoke on it.
+02. If above scenarios fail to satisfy. The extension will fallback to package.json in project root folder.
 
 ## Settings
 - `yarn.runInTerminal` defines whether the command is run
 in a terminal window or whether the output form the command is shown in the `Output` window. The default is to show the output in the terminal.
 - `yarn.bin` custom npm bin name, the default is `yarn`.
+- `yarn.packageJson` default package json path. realtive to current project root
 
 ##### Example
 ```javascript
 {
 	"yarn.runInTerminal": false
+  "yarn.packageJson": "src/package.json"
 }
 ```
 
