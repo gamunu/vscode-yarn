@@ -2,7 +2,7 @@ import { ChildProcess, exec } from 'child_process';
 import { workspace as Workspace, ViewColumn, window, Terminal } from 'vscode';
 import { outputChannel } from './output';
 import { runInTerminal, Options } from 'run-in-terminal';
-import { useTerminal, getYarnBin } from './utils'
+import { useTerminal, getYarnBin, dontHideOutputOnSuccess } from './utils'
 import * as Path from 'path';
 
 const kill = require('tree-kill');
@@ -97,7 +97,9 @@ function runCommandInOutputWindow(args: string[], cwd: string) {
             outputChannel.appendLine('');
             outputChannel.appendLine('--------------------')
             outputChannel.appendLine('');
-            outputChannel.hide();
+            if(!dontHideOutputOnSuccess()) {
+                outputChannel.hide();
+            }
         }
 
         childs.delete(child.pid);

@@ -1,3 +1,8 @@
+## 1.4.0 - 12th November, 2017
+
+* New workspace settings
+  * yarn.dontHideOutputOnSuccess (default false) Keep the output panel visible when yarn execution is successful (no effect with runInTerminal)
+
 ## 1.3.0 - 11th September, 2017
 
 * New workspace settings
