@@ -35,3 +35,7 @@ export function useTerminal() {
 export function getYarnBin() {
     return Workspace.getConfiguration('yarn')['bin'] || 'yarn';
 }
+
+export function dontHideOutputOnSuccess() {
+    return Workspace.getConfiguration('yarn')['dontHideOutputOnSuccess'];
+}
