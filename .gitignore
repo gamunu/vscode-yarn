@@ -3,4 +3,5 @@ node_modules
 *.vsix
 *.lock
 npm-debug.log
+package-lock.json
 .vs

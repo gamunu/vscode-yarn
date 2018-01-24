@@ -37,7 +37,7 @@ It has different behaviors on Unix or Windows.
 
 ## Settings
 - `yarn.runInTerminal` defines whether the command is run
-in a terminal window or whether the output form the command is shown in the `Output` window. The default is to show the output in the terminal.
+in a terminal window or whether the output form the command is shown in the `Output` window. The default is to show the output in the output window.
 - `yarn.bin` custom npm bin name, the default is `yarn`.
 - `yarn.packageJson` default package json path. realtive to current project root
 
