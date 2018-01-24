@@ -36,15 +36,16 @@ It has different behaviors on Unix or Windows.
 02. If above scenarios fail to satisfy. The extension will fallback to package.json in project root folder.
 
 ## Settings
-- `yarn.runInTerminal` defines whether the command is run
-in a terminal window or whether the output form the command is shown in the `Output` window. The default is to show the output in the output window.
+- `yarn.runInTerminal` defines whether the command is run in a terminal window or whether the output form the command is shown in the `Output` window. The default is to show the output in the output window.
+- `yarn.dontHideOutputOnSuccess` Keep the output panel visible when yarn execution is successful. No effect with runInTerminal.
 - `yarn.bin` custom npm bin name, the default is `yarn`.
 - `yarn.packageJson` default package json path. realtive to current project root
 
 ##### Example
 ```javascript
 {
-	"yarn.runInTerminal": false
+  "yarn.runInTerminal": false,
+  "yarn.dontHideOutputOnSuccess": true
   "yarn.packageJson": "src/package.json"
 }
 ```
