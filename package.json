@@ -2,7 +2,7 @@
   "name": "vscode-yarn",
   "displayName": "yarn",
   "description": "yarn commands for VSCode",
-  "version": "1.3.0",
+  "version": "1.5.0",
   "publisher": "gamunu",
   "icon": "yarn_icon.png",
   "engines": {
@@ -98,26 +98,57 @@
         "title": "Raw Yarn Command",
         "category": "Yarn"
       }
-    ]
-  },
-  "configuration": {
-    "type": "object",
-    "title": "yarn VSCode Yarn",
-    "properties": {
-      "yarn.runInTerminal": {
-        "type": "boolean",
-        "default": false,
-        "description": "Run yarn commands in a terminal, otherwise shows the output in the output panel"
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "when": "resourceFilename == 'package.json'",
+          "command": "yarn-script.installPackages",
+          "group": "navigation@+1"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "yarn-script.runScript",
+        "key": "Ctrl+R Shift+R",
+        "mac": "Cmd+R Shift+R"
       },
-      "yarn.bin": {
-        "type": "string",
-        "default": "yarn",
-        "description": "yarn bin name"
+      {
+        "command": "yarn-script.runScriptLast",
+        "key": "Ctrl+R R",
+        "mac": "Cmd+R R"
       },
-      "yarn.dontHideOutputOnSuccess": {
-        "type": "boolean",
-        "default": false,
-        "description": "Keep the output panel visible when yarn execution is successful (no effect with runInTerminal)"
+      {
+        "command": "yarn-script.terminate",
+        "key": "Ctrl+R Shift+X",
+        "mac": "Cmd+R Shift+X"
+      },
+      {
+        "command": "yarn-script.test",
+        "key": "Ctrl+R T",
+        "mac": "Cmd+R T"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "yarn VSCode Yarn",
+      "properties": {
+        "yarn.runInTerminal": {
+          "type": "boolean",
+          "default": false,
+          "description": "Run yarn commands in a terminal, otherwise shows the output in the output panel"
+        },
+        "yarn.bin": {
+          "type": "string",
+          "default": "yarn",
+          "description": "yarn bin name"
+        },
+        "yarn.dontHideOutputOnSuccess": {
+          "type": "boolean",
+          "default": true,
+          "description": "Keep the output panel visible when yarn execution is successful (no effect with runInTerminal)"
+        }
       }
     }
   },

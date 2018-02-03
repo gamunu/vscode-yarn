@@ -20,6 +20,10 @@
 
 Not happy with the available commands ? No problem, raw command is also available. Enter any yarn command you want.
 
+##Explorer context menu
+
+Run npm install, also available in the context menu of the explorer when the `package.json file
+
 ## Run last executed script
 
 You can also run the last executed script by typing `yarn run last...`.
@@ -36,19 +40,24 @@ It has different behaviors on Unix or Windows.
 02. If above scenarios fail to satisfy. The extension will fallback to package.json in project root folder.
 
 ## Settings
+
 - `yarn.runInTerminal` defines whether the command is run in a terminal window or whether the output form the command is shown in the `Output` window. The default is to show the output in the output window.
-- `yarn.dontHideOutputOnSuccess` Keep the output panel visible when yarn execution is successful. No effect with runInTerminal.
+- `yarn.dontHideOutputOnSuccess` Keep the output panel visible when yarn execution is successful. No effect with runInTerminal. The default is to keep output window open.
 - `yarn.bin` custom npm bin name, the default is `yarn`.
-- `yarn.packageJson` default package json path. realtive to current project root
+- `yarn.packageJson` default package json path. relative to current project root
 
 ##### Example
 ```javascript
 {
   "yarn.runInTerminal": false,
-  "yarn.dontHideOutputOnSuccess": true
+  "yarn.dontHideOutputOnSuccess": false
   "yarn.packageJson": "src/package.json"
 }
 ```
+
+## Keyboard Shortcuts
+
+The extension defines a chording keyboard shortcut for the `R` key. As a consequence an existing keybinding for `R` is not executed immediately. If this is not desired, then please bind another key for these commands, see the [customization](https://code.visualstudio.com/docs/customization/keybindings) documentation.
 
 ## Contribute
 

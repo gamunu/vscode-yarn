@@ -1,13 +1,13 @@
 import { window as Window } from 'vscode';
-import { packageExists } from './utils';
+import { packageExists, CommandArgument } from './utils';
 import * as Messages from './messages';
 import { runCommand } from './run-command';
 
-export function yarnInstallPackages() {
+export function yarnInstallPackages(arg: CommandArgument) {
     if (!packageExists()) {
         Messages.noPackageError();
         return;
     }
 
-    runCommand(['install']);
+    runCommand(['install'], arg)
 };
