@@ -1,141 +1,172 @@
 {
-    "name": "vscode-yarn",
-    "displayName": "yarn",
-    "description": "yarn commands for VSCode",
-    "version": "1.4.0",
-    "publisher": "gamunu",
-    "icon": "yarn_icon.png",
-    "engines": {
-        "vscode": "^1.19.0"
-    },
-    "categories": [
-        "Other"
+  "name": "vscode-yarn",
+  "displayName": "yarn",
+  "description": "yarn commands for VSCode",
+  "version": "1.5.0",
+  "publisher": "gamunu",
+  "icon": "yarn_icon.png",
+  "engines": {
+    "vscode": "^1.19.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "license": "SEE LICENSE IN LICENSE.md",
+  "bugs": {
+    "url": "https://github.com/gamunu/vscode-yarn/issues"
+  },
+  "homepage": "https://github.com/gamunu/vscode-yarn/blob/master/README.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gamunu/vscode-yarn.git"
+  },
+  "activationEvents": [
+    "onCommand:yarn-script.installPackages",
+    "onCommand:yarn-script.addPackages",
+    "onCommand:yarn-script.addPackage",
+    "onCommand:yarn-script.addPackageDev",
+    "onCommand:yarn-script.runScript",
+    "onCommand:yarn-script.runScriptLast",
+    "onCommand:yarn-script.init",
+    "onCommand:yarn-script.removePackage",
+    "onCommand:yarn-script.publish",
+    "onCommand:yarn-script.raw",
+    "onCommand:yarn-script.terminate",
+    "onCommand:yarn-script.start",
+    "onCommand:yarn-script.test"
+  ],
+  "main": "./out/extension",
+  "contributes": {
+    "commands": [
+      {
+        "command": "yarn-script.start",
+        "title": "Start",
+        "category": "Yarn"
+      },
+      {
+        "command": "yarn-script.test",
+        "title": "Test",
+        "category": "Yarn"
+      },
+      {
+        "command": "yarn-script.terminate",
+        "title": "Terminate Running Yarn Script",
+        "category": "Yarn"
+      },
+      {
+        "command": "yarn-script.installPackages",
+        "title": "Install Packages",
+        "category": "Yarn"
+      },
+      {
+        "command": "yarn-script.addPackage",
+        "title": "Add and Save Dependency",
+        "category": "Yarn"
+      },
+      {
+        "command": "yarn-script.addPackageDev",
+        "title": "Add and Save dev. Dependency",
+        "category": "Yarn"
+      },
+      {
+        "command": "yarn-script.runScript",
+        "title": "Run Yarn Script",
+        "category": "Yarn"
+      },
+      {
+        "command": "yarn-script.runScriptLast",
+        "title": "Run Last Yarn Script",
+        "category": "Yarn"
+      },
+      {
+        "command": "yarn-script.init",
+        "title": "Initialize Yarn Package",
+        "category": "Yarn"
+      },
+      {
+        "command": "yarn-script.removePackage",
+        "title": "Uninstall Dependency",
+        "category": "Yarn"
+      },
+      {
+        "command": "yarn-script.publish",
+        "title": "Publish Package",
+        "category": "Yarn"
+      },
+      {
+        "command": "yarn-script.raw",
+        "title": "Raw Yarn Command",
+        "category": "Yarn"
+      }
     ],
-    "license": "SEE LICENSE IN LICENSE.md",
-    "bugs": {
-        "url": "https://github.com/gamunu/vscode-yarn/issues"
-    },
-    "homepage": "https://github.com/gamunu/vscode-yarn/blob/master/README.md",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/gamunu/vscode-yarn.git"
-    },
-    "activationEvents": [
-        "onCommand:yarn-script.installPackages",
-        "onCommand:yarn-script.addPackages",
-        "onCommand:yarn-script.addPackage",
-        "onCommand:yarn-script.addPackageDev",
-        "onCommand:yarn-script.runScript",
-        "onCommand:yarn-script.runScriptLast",
-        "onCommand:yarn-script.init",
-        "onCommand:yarn-script.removePackage",
-        "onCommand:yarn-script.publish",
-        "onCommand:yarn-script.raw",
-        "onCommand:yarn-script.terminate",
-        "onCommand:yarn-script.start",
-        "onCommand:yarn-script.test"
-    ],
-    "main": "./out/extension",
-    "contributes": {
-        "commands": [
-            {
-                "command": "yarn-script.start",
-                "title": "Start",
-                "category": "Yarn"
-            },
-            {
-                "command": "yarn-script.test",
-                "title": "Test",
-                "category": "Yarn"
-            },
-            {
-                "command": "yarn-script.terminate",
-                "title": "Terminate Running Yarn Script",
-                "category": "Yarn"
-            },
-            {
-                "command": "yarn-script.installPackages",
-                "title": "Install Packages",
-                "category": "Yarn"
-            },
-            {
-                "command": "yarn-script.addPackage",
-                "title": "Add and Save Dependency",
-                "category": "Yarn"
-            },
-            {
-                "command": "yarn-script.addPackageDev",
-                "title": "Add and Save dev. Dependency",
-                "category": "Yarn"
-            },
-            {
-                "command": "yarn-script.runScript",
-                "title": "Run Yarn Script",
-                "category": "Yarn"
-            },
-            {
-                "command": "yarn-script.runScriptLast",
-                "title": "Run Last Yarn Script",
-                "category": "Yarn"
-            },
-            {
-                "command": "yarn-script.init",
-                "title": "Initialize Yarn Package",
-                "category": "Yarn"
-            },
-            {
-                "command": "yarn-script.removePackage",
-                "title": "Uninstall Dependency",
-                "category": "Yarn"
-            },
-            {
-                "command": "yarn-script.publish",
-                "title": "Publish Package",
-                "category": "Yarn"
-            },
-            {
-                "command": "yarn-script.raw",
-                "title": "Raw Yarn Command",
-                "category": "Yarn"
-            }
-        ]
-    },
-    "configuration": {
-        "type": "object",
-        "title": "yarn VSCode Yarn",
-        "properties": {
-            "yarn.runInTerminal": {
-                "type": "boolean",
-                "default": false,
-                "description": "Run yarn commands in a terminal, otherwise shows the output in the output panel"
-            },
-            "yarn.bin": {
-                "type": "string",
-                "default": "yarn",
-                "description": "yarn bin name"
-            },
-            "yarn.dontHideOutputOnSuccess": {
-                "type": "boolean",
-                "default": false,
-                "description": "Keep the output panel visible when yarn execution is successful (no effect with runInTerminal)"
-            }
+    "menus": {
+      "explorer/context": [
+        {
+          "when": "resourceFilename == 'package.json'",
+          "command": "yarn-script.installPackages",
+          "group": "navigation@+1"
         }
+      ]
     },
-    "scripts": {
-        "vscode:prepublish": "npm run compile",
-        "compile": "tsc -p ./",
-        "watch": "tsc -watch -p ./",
-        "postinstall": "node ./node_modules/vscode/bin/install"
-    },
-    "devDependencies": {
-        "typescript": "^2.6.1",
-        "vscode": "^1.1.6",
-        "@types/node": "^7.0.43",
-        "@types/mocha": "^2.2.42"
-    },
-    "dependencies": {
-        "global": "^4.3.2",
-        "tree-kill": "^1.2.0",
-        "run-in-terminal": "^0.0.3"
+    "keybindings": [
+      {
+        "command": "yarn-script.runScript",
+        "key": "Ctrl+R Shift+R",
+        "mac": "Cmd+R Shift+R"
+      },
+      {
+        "command": "yarn-script.runScriptLast",
+        "key": "Ctrl+R R",
+        "mac": "Cmd+R R"
+      },
+      {
+        "command": "yarn-script.terminate",
+        "key": "Ctrl+R Shift+X",
+        "mac": "Cmd+R Shift+X"
+      },
+      {
+        "command": "yarn-script.test",
+        "key": "Ctrl+R T",
+        "mac": "Cmd+R T"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "yarn VSCode Yarn",
+      "properties": {
+        "yarn.runInTerminal": {
+          "type": "boolean",
+          "default": false,
+          "description": "Run yarn commands in a terminal, otherwise shows the output in the output panel"
+        },
+        "yarn.bin": {
+          "type": "string",
+          "default": "yarn",
+          "description": "yarn bin name"
+        },
+        "yarn.dontHideOutputOnSuccess": {
+          "type": "boolean",
+          "default": true,
+          "description": "Keep the output panel visible when yarn execution is successful (no effect with runInTerminal)"
+        }
+      }
     }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install"
+  },
+  "devDependencies": {
+    "typescript": "^2.6.1",
+    "vscode": "^1.1.6",
+    "@types/node": "^7.0.43",
+    "@types/mocha": "^2.2.42"
+  },
+  "dependencies": {
+    "global": "^4.3.2",
+    "tree-kill": "^1.2.0",
+    "run-in-terminal": "^0.0.3"
+  }
 }

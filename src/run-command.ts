@@ -2,7 +2,7 @@ import { ChildProcess, exec } from 'child_process';
 import { workspace as Workspace, ViewColumn, window, Terminal } from 'vscode';
 import { outputChannel } from './output';
 import { runInTerminal, Options } from 'run-in-terminal';
-import { useTerminal, getYarnBin, dontHideOutputOnSuccess } from './utils'
+import { useTerminal, getYarnBin, dontHideOutputOnSuccess, CommandArgument } from './utils'
 import * as Path from 'path';
 
 const kill = require('tree-kill');
@@ -27,7 +27,7 @@ export function terminate(pid) {
     }
 }
 
-export function runCommand(args: string[]) {
+export function runCommand(args: string[], arg?: CommandArgument) {
     let cwd = Workspace.rootPath
 
     let confPackagejson = Workspace.getConfiguration('yarn')['packageJson']
@@ -39,6 +39,11 @@ export function runCommand(args: string[]) {
     let editor = window.activeTextEditor;
     if (editor && editor.document.fileName.endsWith("package.json")) {
         cwd = editor.document.fileName.replace(/package.json$/i, "");
+    }
+
+    // If the runCommand exected via Explorer contect menu
+    if (arg && arg.fsPath) {
+        cwd =  arg.fsPath.replace(/package.json$/i, "");
     }
 
     const options = {

@@ -1,3 +1,9 @@
+## 1.5 - 03rd February, 2018
+
+* Explorer context menu for installing packages.
+* Default behavior changed to keep the output window open after executing a command. yarn.dontHideOutputOnSuccess (default true)
+* Fix for [Issue 7](https://github.com/gamunu/vscode-yarn/issues/7)
+
 ## 1.4.0 - 12th November, 2017
 
 * New workspace settings
@@ -6,7 +12,7 @@
 ## 1.3.0 - 11th September, 2017
 
 * New workspace settings
-  * yarn.packageJson (default "") specify a default package json file path. relative to current project root
+  * yarn.packageJson (default "") specify a default package json file path. relative to current project root.
 
 ## 1.2.0 - 11th May, 2017
 

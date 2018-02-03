@@ -2,6 +2,11 @@ import * as Fs from 'fs';
 import * as Path from 'path';
 import { workspace as Workspace, window } from 'vscode';
 
+// Explorer context menu command argument
+export interface CommandArgument {
+	fsPath: string;
+}
+
 export function packageExists() {
     if (!Workspace.rootPath) {
         return false;
