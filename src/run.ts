@@ -7,88 +7,87 @@ import { runCommand } from './run-command';
 let lastScript: string;
 
 export function yarnRunScript() {
-    const scripts = readScripts();
-    if (!scripts) {
-        return;
-    }
+	const scripts = readScripts();
+	if (!scripts) {
+		return;
+	}
 
-    const items: QuickPickItem[] = Object.keys(scripts).map((key) => {
+	const items: QuickPickItem[] = Object.keys(scripts).map((key) => {
+		return { label: key, description: scripts[key] };
+	});
 
-        return { label: key, description: scripts[key] };
-    });
-
-    Window.showQuickPick(items).then((value) => {
-        lastScript = value.label;
-        runCommand(['run', value.label]);
-    });
+	Window.showQuickPick(items).then((value) => {
+		lastScript = value.label;
+		runCommand(['run', value.label]);
+	});
 };
 
 export function yarnTest() {
-    const scripts = readScripts();
-    if (!scripts) {
-        return;
-    }
+	const scripts = readScripts();
+	if (!scripts) {
+		return;
+	}
 
-    if (!scripts.test) {
-        Messages.noTestScript();
-        return;
-    }
+	if (!scripts.test) {
+		Messages.noTestScript();
+		return;
+	}
 
-    lastScript = 'test';
-    runCommand(['run', 'test']);
+	lastScript = 'test';
+	runCommand(['run', 'test']);
 }
 
 export function yarnStart() {
-    const scripts = readScripts();
-    if (!scripts) {
-        return;
-    }
+	const scripts = readScripts();
+	if (!scripts) {
+		return;
+	}
 
-    if (!scripts.start) {
-        Messages.noStartScript();
-        return;
-    }
+	if (!scripts.start) {
+		Messages.noStartScript();
+		return;
+	}
 
-    lastScript = 'start';
-    runCommand(['run', 'start']);
+	lastScript = 'start';
+	runCommand(['run', 'start']);
 }
 
 export function yarnRunLastScript() {
-    if (lastScript) {
-        runCommand(['run', lastScript]);
-    }
-    else {
-        Messages.noLastScript();
-    }
+	if (lastScript) {
+		runCommand(['run', lastScript]);
+	}
+	else {
+		Messages.noLastScript();
+	}
 }
 
 const readScripts = function () {
-    let filename = Path.join(Workspace.rootPath, 'package.json');
-    let confPackagejson = Workspace.getConfiguration('yarn')['packageJson']
-    
-    if (confPackagejson) {
-        filename =  Path.join(Workspace.rootPath, confPackagejson)
-    }
+	let filename = Path.join(Workspace.rootPath, 'package.json');
+	const confPackagejson = Workspace.getConfiguration('yarn')['packageJson'];
 
-    let editor = Window.activeTextEditor;
-    if (editor && editor.document.fileName.endsWith("package.json")) {
-        filename = editor.document.fileName
-    }
+	if (confPackagejson) {
+		filename = Path.join(Workspace.rootPath, confPackagejson);
+	}
 
-    try {
-        const content = Fs.readFileSync(filename).toString();
-        const json = JSON.parse(content);
+	const editor = Window.activeTextEditor;
+	if (editor && editor.document.fileName.endsWith("package.json")) {
+		filename = editor.document.fileName;
+	}
 
-        if (json.scripts) {
-            return json.scripts;
-        }
+	try {
+		const content = Fs.readFileSync(filename).toString();
+		const json = JSON.parse(content);
 
-        Messages.noScriptsInfo();
-        return null;
-    }
-    catch (ignored) {
-        Messages.noPackageError();
-        return null;
-    }
+		if (json.scripts) {
+			return json.scripts;
+		}
+
+		Messages.noScriptsInfo();
+		return null;
+	}
+	catch (ignored) {
+		Messages.noPackageError();
+		return null;
+	}
 };
 

@@ -1,3 +1,9 @@
+## 1.6 - 26th February, 2018
+
+* Fix for [Issue 9](https://github.com/gamunu/vscode-yarn/issues/9)
+* Fix for [Issue 8](https://github.com/gamunu/vscode-yarn/issues/8)
+* Fixed the bug context menu not correctly picking up the package.json file
+
 ## 1.5 - 03rd February, 2018
 
 * Explorer context menu for installing packages.

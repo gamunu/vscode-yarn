@@ -2,7 +2,7 @@
   <img src="https://raw.githubusercontent.com/gamunu/vscode-yarn/master/yarn_icon.png?raw=true" alt="vscode-yarn: VSCode extensions to manage yarn commands." width="150">
   <br>
   <a href="https://github.com/gamunu/vscode-yarn/releases/latest"><img src="https://img.shields.io/github/release/gamunu/vscode-yarn.svg" alt="Releases"></a>
-  <a href="https://code.visualstudio.com/updates/v1_19"><img src="https://img.shields.io/badge/VS_Code-v1.19+-373277.svg"/></a> 
+  <a href="https://code.visualstudio.com/updates/v1_19"><img src="https://img.shields.io/badge/VS_Code-v1.19+-373277.svg"/></a>
   <a href="https://marketplace.visualstudio.com/items?itemName=gamunu.vscode-yarn"><img src="https://vsmarketplacebadge.apphb.com/installs/gamunu.vscode-yarn.svg"/></a>
   <a href="https://github.com/gamunu/vscode-yarn/issues"><img src="https://img.shields.io/github/issues/gamunu/vscode-yarn.svg" alt="Issues"></a>
 </p>
@@ -67,7 +67,9 @@ git clone git@github.com:gamunu/vscode-yarn.git gamunu.vscode-yarn
 
 ### Explorer context menu
 
-Run npm install, also available in the context menu of the explorer when the `package.json file
+`yarn install` also available in the `package.json` file's explorer context menu.
+
+![Context menu](images/context.png)
 
 ### Run last executed script
 
@@ -76,7 +78,7 @@ You can also run the last executed script by typing `yarn run last...`.
 ### Terminate a script
 
 You can terminate a script with the `terminate` command. It uses the `tree-kill` module that you can find on `yarn`.
-It has different behaviors on Unix or Windows. 
+It has different behaviors on Unix or Windows.
 
 ### Order of execution of yarn commands
 
@@ -86,10 +88,10 @@ It has different behaviors on Unix or Windows.
 
 ## Settings
 
-- `yarn.runInTerminal` defines whether the command is run in a terminal window or whether the output form the command is shown in the `Output` window. The default is to show the output in the output window.
+- `yarn.runInTerminal` Defines whether the command is run in a terminal window or whether the output form the command is shown in the `Output` window. The default is to show the output in the output window.
 - `yarn.dontHideOutputOnSuccess` Keep the output panel visible when yarn execution is successful. No effect with runInTerminal. The default is to keep output window open.
-- `yarn.bin` custom npm bin name, the default is `yarn`.
-- `yarn.packageJson` default package json path. relative to current project root
+- `yarn.bin` Custom npm bin name, the default is `yarn`.
+- `yarn.packageJson` Default package json path. relative to current project root.
 
 ##### Example
 ```javascript

@@ -7,40 +7,45 @@ export interface CommandArgument {
 	fsPath: string;
 }
 
-export function packageExists() {
-    if (!Workspace.rootPath) {
-        return false;
-    }
+export function packageExists(arg?: CommandArgument) {
+	if (!Workspace.rootPath) {
+		return false;
+	}
 
-    let filename = Path.join(Workspace.rootPath, 'package.json');
-    let confPackagejson = Workspace.getConfiguration('yarn')['packageJson']
+	let filepath = Path.join(Workspace.rootPath, 'package.json');
+	const confPackagejson = Workspace.getConfiguration('yarn')['packageJson'];
 
-    if (confPackagejson) {
-        filename = Path.join(Workspace.rootPath, confPackagejson)
-    }
+	if (confPackagejson) {
+		filepath = Path.join(Workspace.rootPath, confPackagejson);
+	}
 
-    let editor = window.activeTextEditor;
-    if (editor && editor.document.fileName.endsWith("package.json")) {
-        filename = editor.document.fileName;
-    }
+	const editor = window.activeTextEditor;
+	if (editor && editor.document.fileName.endsWith("package.json")) {
+		filepath = editor.document.fileName;
+	}
 
-    try {
-        const stat = Fs.statSync(filename);
-        return stat && stat.isFile();
-    }
-    catch (ignored) {
-        return false;
-    }
+	// If the runCommand exected via Explorer contect menu
+	if (arg && arg.fsPath) {
+		filepath = arg.fsPath;
+	}
+
+	try {
+		const stat = Fs.statSync(filepath);
+		return stat && stat.isFile();
+	}
+	catch (ignored) {
+		return false;
+	}
 };
 
 export function useTerminal() {
-    return Workspace.getConfiguration('yarn')['runInTerminal'];
+	return Workspace.getConfiguration('yarn')['runInTerminal'];
 }
 
 export function getYarnBin() {
-    return Workspace.getConfiguration('yarn')['bin'] || 'yarn';
+	return Workspace.getConfiguration('yarn')['bin'] || 'yarn';
 }
 
 export function dontHideOutputOnSuccess() {
-    return Workspace.getConfiguration('yarn')['dontHideOutputOnSuccess'];
+	return Workspace.getConfiguration('yarn')['dontHideOutputOnSuccess'];
 }

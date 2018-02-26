@@ -2,11 +2,11 @@
   "name": "vscode-yarn",
   "displayName": "yarn",
   "description": "yarn commands for VSCode",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "publisher": "gamunu",
   "icon": "yarn_icon.png",
   "engines": {
-    "vscode": "^1.19.0"
+    "vscode": "^1.17.0"
   },
   "categories": [
     "Other"
@@ -20,6 +20,9 @@
     "type": "git",
     "url": "https://github.com/gamunu/vscode-yarn.git"
   },
+  "keywords": [
+    "multi-root ready"
+  ],
   "activationEvents": [
     "onCommand:yarn-script.installPackages",
     "onCommand:yarn-script.addPackages",
@@ -144,6 +147,10 @@
           "default": "yarn",
           "description": "yarn bin name"
         },
+        "yarn.packageJson": {
+          "type": "string",
+          "description": "Default package json path. relative to current project root"
+        },
         "yarn.dontHideOutputOnSuccess": {
           "type": "boolean",
           "default": true,
@@ -156,13 +163,15 @@
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "postinstall": "node ./node_modules/vscode/bin/install"
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "tslint": "tslint src/*.ts"
   },
   "devDependencies": {
     "typescript": "^2.6.1",
-    "vscode": "^1.1.6",
+    "vscode": "^1.0.0",
     "@types/node": "^7.0.43",
-    "@types/mocha": "^2.2.42"
+    "@types/mocha": "^2.2.42",
+    "tslint": "^4.2.0"
   },
   "dependencies": {
     "global": "^4.3.2",
