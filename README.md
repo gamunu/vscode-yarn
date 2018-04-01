@@ -6,7 +6,7 @@
   <a href="https://marketplace.visualstudio.com/items?itemName=gamunu.vscode-yarn"><img src="https://vsmarketplacebadge.apphb.com/installs/gamunu.vscode-yarn.svg"/></a>
   <a href="https://github.com/gamunu/vscode-yarn/issues"><img src="https://img.shields.io/github/issues/gamunu/vscode-yarn.svg" alt="Issues"></a>
 </p>
-<p align="center"VSCode-Yarn: VSCode extensions to manage yarn commands.</p>
+<p align="center">VSCode-Yarn: VSCode extensions to manage yarn commands.</p>
 
 ## Getting started
 
