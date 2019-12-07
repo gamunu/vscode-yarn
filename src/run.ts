@@ -52,6 +52,21 @@ export function yarnStart() {
 	runCommand(['run', 'start']);
 }
 
+export function yarnBuild() {
+	const scripts = readScripts();
+	if (!scripts) {
+		return;
+	}
+
+	if (!scripts.build) {
+		Messages.noBuildScript();
+		return;
+	}
+
+	lastScript = 'build';
+	runCommand(['run', 'build']);
+}
+
 export function yarnRunLastScript() {
 	if (lastScript) {
 		runCommand(['run', lastScript]);

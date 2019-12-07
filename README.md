@@ -60,6 +60,7 @@ git clone git@github.com:gamunu/vscode-yarn.git gamunu.vscode-yarn
 * `yarn remove <pkg>`
 * `yarn start`
 * `yarn test`
+* `yarn build`
 * `yarn publish [tag]`
 * `yarn run <script>`
 
@@ -70,6 +71,17 @@ git clone git@github.com:gamunu/vscode-yarn.git gamunu.vscode-yarn
 `yarn install` also available in the `package.json` file's explorer context menu.
 
 ![Context menu](images/context.png)
+
+### TouchBar support
+
+Support for Macbook Pro Touch Bar. Following yarn commands are available:
+
+- yarn install
+- yarn start
+- yarn test
+- yarn build
+
+![touch bar support](images/touchbar.png)
 
 ### Run last executed script
 
@@ -90,8 +102,13 @@ It has different behaviors on Unix or Windows.
 
 - `yarn.runInTerminal` Defines whether the command is run in a terminal window or whether the output form the command is shown in the `Output` window. The default is to show the output in the output window.
 - `yarn.dontHideOutputOnSuccess` Keep the output panel visible when yarn execution is successful. No effect with runInTerminal. The default is to keep output window open.
-- `yarn.bin` Custom npm bin name, the default is `yarn`.
+- `yarn.bin` Custom yarn bin name, the default is `yarn`.
 - `yarn.packageJson` Default package json path. relative to current project root.
+- `yarn.enableTouchbar` Enable TouchBar support in MacOSX. TouchBar support includes:
+   - yarn install
+   - yarn run build
+   - yarn run test
+   - yarn run start
 
 ##### Example
 ```javascript

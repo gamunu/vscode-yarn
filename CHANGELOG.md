@@ -1,3 +1,19 @@
+## 1.7 - 08th of December, 2019
+
+* Fix for [Issue 11](https://github.com/gamunu/vscode-yarn/issues/11)
+* Add touchbar assets and update package.json.
+touchbar support includes:
+   - yarn run test
+   - yarn install
+   - yarn run build
+   - yarn run start
+* New workspace setting `config.yarn.enableTouchbar` to
+enable touchbar support.
+* `run.runInTerminal` is now default to true.
+* Add typings for tree-kill package
+* Add new line before EOF in all ts files.
+* Add webpack package build
+
 ## 1.6 - 26th February, 2018
 
 * Fix for [Issue 9](https://github.com/gamunu/vscode-yarn/issues/9)

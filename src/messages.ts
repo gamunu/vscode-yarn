@@ -24,6 +24,10 @@ export function noStartScript() {
 	Window.showErrorMessage('No start script in your package.json file');
 }
 
+export function noBuildScript() {
+	Window.showErrorMessage('No build script in your package.json file');
+}
+
 export function noScriptsInfo() {
 	Window.showInformationMessage('No scripts are defined in \'package.json\'');
 };
