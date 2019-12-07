@@ -2,7 +2,7 @@
   "name": "vscode-yarn",
   "displayName": "yarn",
   "description": "yarn commands for VSCode",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "publisher": "gamunu",
   "icon": "yarn_icon.png",
   "engines": {
@@ -46,13 +46,13 @@
         "command": "yarn-script.start",
         "title": "Start",
         "category": "Yarn",
-				"icon": "./assets/start.png"
+        "icon": "./assets/start.png"
       },
       {
         "command": "yarn-script.test",
         "title": "Test",
         "category": "Yarn",
-				"icon": "./assets/test.png"
+        "icon": "./assets/test.png"
       },
       {
         "command": "yarn-script.terminate",
@@ -95,12 +95,12 @@
         "title": "Uninstall Dependency",
         "category": "Yarn"
       },
-			{
-				"command": "yarn-script.build",
-				"title": "Run Build",
-				"category": "Yarn",
-				"icon": "./assets/build.png"
-			},
+      {
+        "command": "yarn-script.build",
+        "title": "Run Build",
+        "category": "Yarn",
+        "icon": "./assets/build.png"
+      },
       {
         "command": "yarn-script.publish",
         "title": "Publish Package",
@@ -198,21 +198,21 @@
     }
   },
   "scripts": {
-		"vscode:prepublish": "webpack --mode production",
-		"webpack": "webpack --mode development",
-		"webpack-dev": "webpack --mode development --watch",
-		"postinstall": "node ./node_modules/vscode/bin/install",
-		"tslint": "tslint src/*.ts"
+    "vscode:prepublish": "webpack --mode production",
+    "webpack": "webpack --mode development",
+    "webpack-dev": "webpack --mode development --watch",
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "tslint": "tslint src/*.ts"
   },
   "devDependencies": {
     "typescript": "3.0.3",
     "vscode": "^1.1.22",
     "@types/node": "^7.0.43",
     "@types/mocha": "^2.2.42",
-		"ts-loader": "^4.4.2",
+    "ts-loader": "^4.4.2",
     "tslint": "^5.11.0",
-		"webpack": "^4.39.1",
-		"webpack-cli": "^3.3.0"
+    "webpack": "^4.39.1",
+    "webpack-cli": "^3.3.0"
   },
   "dependencies": {
     "global": "^4.3.2",
