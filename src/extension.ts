@@ -6,7 +6,7 @@ import yarnInit from './init';
 import { yarnInstallPackages } from './install';
 import { yarnAddPackages, yarnAddPackage, yarnAddPackageDev } from './add';
 import { yarnRemovePackage } from './remove';
-import { yarnRunScript, yarnRunLastScript, yarnStart, yarnTest } from './run';
+import { yarnRunScript, yarnRunLastScript, yarnStart, yarnTest, yarnDev } from './run';
 import { yarnPublish } from './publish';
 import { yarnRawCommand } from './raw';
 import yarnTerminate from './terminate';
@@ -25,7 +25,8 @@ export const activate = function (context: ExtensionContext) {
         Commands.registerCommand('yarn-script.raw', yarnRawCommand),
         Commands.registerCommand('yarn-script.terminate', yarnTerminate),
         Commands.registerCommand('yarn-script.test', yarnTest),
-        Commands.registerCommand('yarn-script.start', yarnStart)
+        Commands.registerCommand('yarn-script.start', yarnStart),
+        Commands.registerCommand('yarn-script.dev', yarnDev)
     ];
     
 	context.subscriptions.push(...disposables, outputChannel);

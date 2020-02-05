@@ -47,3 +47,11 @@ export function noValueError() {
 export function invalidTagError() {
     Window.showErrorMessage('Tag is invalid');
 };
+
+export function noRunScript(script: string) {
+	Window.showErrorMessage('No ' + script + ' script in your package.json file');
+}
+
+export function noDevScript() {
+	Window.showErrorMessage('No dev script in your package.json file');
+}
