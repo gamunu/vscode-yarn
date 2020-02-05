@@ -6,21 +6,28 @@ import { runCommand } from './run-command';
 
 let lastScript: string;
 
-export function yarnRunScript() {
+export function yarnRunScript(arg: string) {
     const scripts = readScripts();
     if (!scripts) {
         return;
     }
+    if (arg) {
+		if (!scripts[arg]) {
+			Messages.noRunScript(arg);
+			return;
+		}
+		lastScript = arg;
+		runCommand(["run", arg]);
+	} else {
+		const items: QuickPickItem[] = Object.keys(scripts).map(key => {
+			return { label: key, description: scripts[key] };
+		});
 
-    const items: QuickPickItem[] = Object.keys(scripts).map((key) => {
-
-        return { label: key, description: scripts[key] };
-    });
-
-    Window.showQuickPick(items).then((value) => {
-        lastScript = value.label;
-        runCommand(['run', value.label]);
-    });
+		Window.showQuickPick(items).then(value => {
+			lastScript = value.label;
+			runCommand(["run", value.label]);
+		});
+	}
 };
 
 export function yarnTest() {
@@ -60,6 +67,21 @@ export function yarnRunLastScript() {
     else {
         Messages.noLastScript();
     }
+}
+
+export function yarnDev() {
+	const scripts = readScripts();
+	if (!scripts) {
+		return;
+	}
+
+	if (!scripts.dev) {
+		Messages.noDevScript();
+		return;
+	}
+
+	lastScript = "dev";
+	runCommand(["run", "dev"]);
 }
 
 const readScripts = function () {
