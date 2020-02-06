@@ -33,7 +33,8 @@
     "onCommand:yarn-script.raw",
     "onCommand:yarn-script.terminate",
     "onCommand:yarn-script.start",
-    "onCommand:yarn-script.test"
+    "onCommand:yarn-script.test",
+    "onCommand:yarn-script.dev"
   ],
   "main": "./out/extension",
   "contributes": {
@@ -96,6 +97,11 @@
       {
         "command": "yarn-script.raw",
         "title": "Raw Yarn Command",
+        "category": "Yarn"
+      },
+      {
+        "command": "yarn-script.dev",
+        "title": "Dev Yarn Command",
         "category": "Yarn"
       }
     ],
