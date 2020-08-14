@@ -10,15 +10,15 @@ export function yarnAddPackages() {
 	}
 
 	runCommand(['add']);
-};
+}
 
 export function yarnAddPackage() {
 	return _addPackage(false);
-};
+}
 
 export function yarnAddPackageDev() {
 	return _addPackage(true);
-};
+}
 
 const _addPackage = function (dev: boolean) {
 	if (!packageExists()) {

@@ -147,22 +147,26 @@
       {
         "command": "yarn-script.runScript",
         "key": "Ctrl+R Shift+R",
-        "mac": "Cmd+R Shift+R"
+        "mac": "Cmd+R Shift+R",
+        "when": "!terminalFocus"
       },
       {
         "command": "yarn-script.runScriptLast",
         "key": "Ctrl+R R",
-        "mac": "Cmd+R R"
+        "mac": "Cmd+R R",
+        "when": "!terminalFocus"
       },
       {
         "command": "yarn-script.terminate",
         "key": "Ctrl+R Shift+X",
-        "mac": "Cmd+R Shift+X"
+        "mac": "Cmd+R Shift+X",
+        "when": "!terminalFocus"
       },
       {
         "command": "yarn-script.test",
         "key": "Ctrl+R T",
-        "mac": "Cmd+R T"
+        "mac": "Cmd+R T",
+        "when": "!terminalFocus"
       }
     ],
     "configuration": {

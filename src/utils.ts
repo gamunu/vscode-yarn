@@ -36,7 +36,7 @@ export function packageExists(arg?: CommandArgument) {
 	catch (ignored) {
 		return false;
 	}
-};
+}
 
 export function useTerminal() {
 	return Workspace.getConfiguration('yarn')['runInTerminal'];

@@ -24,4 +24,4 @@ export function yarnRawCommand() {
 
 			runCommand(args);
 		});
-};
+}
