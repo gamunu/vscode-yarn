@@ -5,7 +5,7 @@ import { runCommand } from './run-command';
 
 export function yarnRemovePackage() {
 	return _removePackage();
-};
+}
 
 const _removePackage = function () {
 	if (!packageExists()) {

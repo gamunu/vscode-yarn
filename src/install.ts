@@ -9,4 +9,4 @@ export function yarnInstallPackages(arg: CommandArgument) {
 	}
 
 	runCommand(['install'], arg);
-};
+}

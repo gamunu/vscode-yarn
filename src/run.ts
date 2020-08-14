@@ -20,7 +20,7 @@ export function yarnRunScript() {
 		lastScript = value.label;
 		runCommand(['run', value.label]);
 	});
-};
+}
 
 export function yarnTest() {
 	const scripts = readScripts();
@@ -105,4 +105,3 @@ const readScripts = function () {
 		return null;
 	}
 };
-

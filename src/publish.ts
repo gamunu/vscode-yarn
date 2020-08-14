@@ -5,7 +5,7 @@ import { runCommand } from './run-command';
 
 export function yarnPublish() {
 	_do('publish');
-};
+}
 
 const _do = function (cmd: string) {
 	if (!packageExists()) {

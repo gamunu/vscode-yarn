@@ -60,7 +60,7 @@ export function runCommand(args: string[], arg?: CommandArgument) {
 	} else {
 		runCommandInOutputWindow(args, cwd);
 	}
-};
+}
 
 function runCommandInTerminal(args: string[], options?: Options): void {
 	runInTerminal(getYarnBin(), args, options);
