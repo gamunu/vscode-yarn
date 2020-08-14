@@ -2,7 +2,7 @@
   "name": "vscode-yarn",
   "displayName": "yarn",
   "description": "yarn commands for VSCode",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "publisher": "gamunu",
   "icon": "yarn_icon.png",
   "engines": {
