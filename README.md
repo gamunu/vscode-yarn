@@ -109,13 +109,15 @@ It has different behaviors on Unix or Windows.
    - yarn run build
    - yarn run test
    - yarn run start
+- `yarn.startScript` will change the default start script for example to `dev`
 
 ##### Example
 ```javascript
 {
   "yarn.runInTerminal": false,
   "yarn.dontHideOutputOnSuccess": false
-  "yarn.packageJson": "src/package.json"
+  "yarn.packageJson": "src/package.json",
+  "yarn.startScript": "dev"
 }
 ```
 

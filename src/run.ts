@@ -3,6 +3,7 @@ import * as Fs from 'fs';
 import { workspace as Workspace, window as Window, QuickPickItem } from 'vscode';
 import * as Messages from './messages';
 import { runCommand } from './run-command';
+import { startScript } from './utils';
 
 let lastScript: string;
 
@@ -42,14 +43,15 @@ export function yarnStart() {
 	if (!scripts) {
 		return;
 	}
+	const startScriptName = startScript();
 
-	if (!scripts.start) {
+	if (!scripts[startScriptName]) {
 		Messages.noStartScript();
 		return;
 	}
 
-	lastScript = 'start';
-	runCommand(['run', 'start']);
+	lastScript = startScriptName;
+	runCommand(['run', startScriptName]);
 }
 
 export function yarnBuild() {
