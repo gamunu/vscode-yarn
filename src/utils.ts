@@ -46,6 +46,10 @@ export function getYarnBin() {
 	return Workspace.getConfiguration('yarn')['bin'] || 'yarn';
 }
 
+export function startScript() {
+	return Workspace.getConfiguration('yarn')['startScript'] || 'start';
+}
+
 export function dontHideOutputOnSuccess() {
 	return Workspace.getConfiguration('yarn')['dontHideOutputOnSuccess'];
 }

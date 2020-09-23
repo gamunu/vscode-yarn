@@ -197,6 +197,10 @@
           "scope": "resource",
           "default": false,
           "description": "Enable yarn commands in the macOS touchbar."
+        },
+        "yarn.startScript": {
+          "type": "string",
+          "description": "Default start script to run (instead of start)"
         }
       }
     }
