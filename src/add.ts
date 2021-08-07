@@ -1,15 +1,16 @@
 import { window as Window } from 'vscode';
-import { packageExists } from './utils';
+import { packageExists, pickPackageJson } from './utils';
 import * as Messages from './messages';
 import { runCommand } from './run-command';
 
-export function yarnAddPackages() {
-	if (!packageExists()) {
+export async function yarnAddPackages() {
+	let packageJson = await pickPackageJson()
+	if (!packageExists(packageJson)) {
 		Messages.noPackageError();
 		return;
 	}
 
-	runCommand(['add']);
+	runCommand(['add'], packageJson);
 }
 
 export function yarnAddPackage() {
@@ -20,8 +21,9 @@ export function yarnAddPackageDev() {
 	return _addPackage(true);
 }
 
-const _addPackage = function (dev: boolean) {
-	if (!packageExists()) {
+const _addPackage = async function (dev: boolean) {
+	let packageJson = await pickPackageJson()
+	if (!packageExists(packageJson)) {
 		Messages.noPackageError();
 		return;
 	}
@@ -52,11 +54,11 @@ const _addPackage = function (dev: boolean) {
 			const args = ['add', ...packages];
 
 			if (hasSaveOption) {
-				runCommand(args);
+				runCommand(args, packageJson);
 			}
 			else {
 				const save = dev ? '--dev' : '';
-				runCommand([...args, save]);
+				runCommand([...args, save], packageJson);
 			}
 		});
 };

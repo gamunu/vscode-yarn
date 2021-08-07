@@ -1,5 +1,5 @@
 import { window as Window } from 'vscode';
-import { packageExists } from './utils';
+import { packageExists, pickPackageJson } from './utils';
 import * as Messages from './messages';
 import { runCommand } from './run-command';
 
@@ -7,8 +7,9 @@ export function yarnPublish() {
 	_do('publish');
 }
 
-const _do = function (cmd: string) {
-	if (!packageExists()) {
+const _do = async function (cmd: string) {
+	let packageJson = await pickPackageJson()
+	if (!packageExists(packageJson)) {
 		Messages.noPackageError();
 		return;
 	}
@@ -20,7 +21,7 @@ const _do = function (cmd: string) {
 		.then((value) => {
 
 			if (!value) {
-				runCommand([cmd]);
+				runCommand([cmd], packageJson);
 				return;
 			}
 
@@ -29,6 +30,6 @@ const _do = function (cmd: string) {
 				return;
 			}
 
-			runCommand([cmd, '--tag', value]);
+			runCommand([cmd, '--tag', value], packageJson);
 		});
 };

@@ -9,6 +9,7 @@ import { yarnRunScript, yarnRunLastScript, yarnStart, yarnBuild, yarnTest } from
 import { yarnPublish } from './publish';
 import { yarnRawCommand } from './raw';
 import yarnTerminate from './terminate';
+import { yarnOutdated } from './outdated';
 
 export const activate = function (context: ExtensionContext) {
 	const disposables = [
@@ -20,6 +21,7 @@ export const activate = function (context: ExtensionContext) {
 		Commands.registerCommand('yarn-script.build', yarnBuild),
 		Commands.registerCommand('yarn-script.runScriptLast', yarnRunLastScript),
 		Commands.registerCommand('yarn-script.init', yarnInit),
+		Commands.registerCommand('yarn-script.outdated', yarnOutdated),
 		Commands.registerCommand('yarn-script.removePackage', yarnRemovePackage),
 		Commands.registerCommand('yarn-script.publish', yarnPublish),
 		Commands.registerCommand('yarn-script.raw', yarnRawCommand),

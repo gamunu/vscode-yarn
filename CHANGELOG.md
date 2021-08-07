@@ -1,3 +1,8 @@
+## 2.0 - 07th of Augest, 2021
+
+* Add WSL support
+* Add Multi-Workspace support
+
 ## 1.7 - 08th of December, 2019
 
 * Fix for [Issue 11](https://github.com/gamunu/vscode-yarn/issues/11)

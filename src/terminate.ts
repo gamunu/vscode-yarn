@@ -6,7 +6,6 @@ class Item implements QuickPickItem {
 	constructor(public label: string,
 		public description: string,
 		public pid: number) {
-
 	}
 }
 
