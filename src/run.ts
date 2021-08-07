@@ -1,13 +1,22 @@
-import * as Path from 'path';
 import * as Fs from 'fs';
-import { workspace as Workspace, window as Window, QuickPickItem } from 'vscode';
+import { window as Window, QuickPickItem } from 'vscode';
 import * as Messages from './messages';
 import { runCommand } from './run-command';
+import { pickPackageJson, packageExists } from './utils';
 
-let lastScript: string;
+let lastScript: {
+	packageJson: string,
+	script: string
+};
 
-export function yarnRunScript() {
-	const scripts = readScripts();
+export async function yarnRunScript() {
+	let packageJson = await pickPackageJson()
+	if (!packageExists(packageJson)) {
+		Messages.noPackageError();
+		return;
+	}
+
+	const scripts = readScripts(packageJson);
 	if (!scripts) {
 		return;
 	}
@@ -17,13 +26,22 @@ export function yarnRunScript() {
 	});
 
 	Window.showQuickPick(items).then((value) => {
-		lastScript = value.label;
-		runCommand(['run', value.label]);
+		lastScript = {
+			packageJson: packageJson,
+			script: value.label
+		};
+		runCommand(['run', value.label], packageJson);
 	});
 }
 
-export function yarnTest() {
-	const scripts = readScripts();
+export async function yarnTest() {
+	let packageJson = await pickPackageJson()
+	if (!packageExists(packageJson)) {
+		Messages.noPackageError();
+		return;
+	}
+
+	const scripts = readScripts(packageJson);
 	if (!scripts) {
 		return;
 	}
@@ -33,12 +51,21 @@ export function yarnTest() {
 		return;
 	}
 
-	lastScript = 'test';
-	runCommand(['run', 'test']);
+	lastScript = {
+		packageJson: packageJson,
+		script: 'test'
+	};
+	runCommand(['run', 'test'], packageJson);
 }
 
-export function yarnStart() {
-	const scripts = readScripts();
+export async function yarnStart() {
+	let packageJson = await pickPackageJson()
+	if (!packageExists(packageJson)) {
+		Messages.noPackageError();
+		return;
+	}
+
+	const scripts = readScripts(packageJson);
 	if (!scripts) {
 		return;
 	}
@@ -48,12 +75,21 @@ export function yarnStart() {
 		return;
 	}
 
-	lastScript = 'start';
-	runCommand(['run', 'start']);
+	lastScript = {
+		packageJson: packageJson,
+		script: 'start'
+	};
+	runCommand(['run', 'start'], packageJson);
 }
 
-export function yarnBuild() {
-	const scripts = readScripts();
+export async function yarnBuild() {
+	let packageJson = await pickPackageJson()
+	if (!packageExists(packageJson)) {
+		Messages.noPackageError();
+		return;
+	}
+
+	const scripts = readScripts(packageJson);
 	if (!scripts) {
 		return;
 	}
@@ -63,34 +99,32 @@ export function yarnBuild() {
 		return;
 	}
 
-	lastScript = 'build';
-	runCommand(['run', 'build']);
+	lastScript = {
+		packageJson: packageJson,
+		script: 'build'
+	};
+	runCommand(['run', 'build'], packageJson);
 }
 
-export function yarnRunLastScript() {
+export async function yarnRunLastScript() {
 	if (lastScript) {
-		runCommand(['run', lastScript]);
+		let rootPath = lastScript.packageJson
+
+		if (rootPath != null && !packageExists(rootPath)) {
+			Messages.noPackageError();
+			return;
+		}
+
+		runCommand(['run', lastScript.script], rootPath);
 	}
 	else {
 		Messages.noLastScript();
 	}
 }
 
-const readScripts = function () {
-	let filename = Path.join(Workspace.rootPath, 'package.json');
-	const confPackagejson = Workspace.getConfiguration('yarn')['packageJson'];
-
-	if (confPackagejson) {
-		filename = Path.join(Workspace.rootPath, confPackagejson);
-	}
-
-	const editor = Window.activeTextEditor;
-	if (editor && editor.document.fileName.endsWith("package.json")) {
-		filename = editor.document.fileName;
-	}
-
+const readScripts = function (packgeJson: string) {
 	try {
-		const content = Fs.readFileSync(filename).toString();
+		const content = Fs.readFileSync(packgeJson).toString();
 		const json = JSON.parse(content);
 
 		if (json.scripts) {

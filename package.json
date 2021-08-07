@@ -1,12 +1,12 @@
 {
   "name": "vscode-yarn",
   "displayName": "yarn",
-  "description": "yarn commands for VSCode",
-  "version": "1.7.1",
+  "description": "Yarn commands for VSCode",
+  "version": "2.0.0",
   "publisher": "gamunu",
   "icon": "yarn_icon.png",
   "engines": {
-    "vscode": "^1.17.0"
+    "vscode": "^1.58.1"
   },
   "categories": [
     "Other"
@@ -31,6 +31,7 @@
     "onCommand:yarn-script.runScript",
     "onCommand:yarn-script.runScriptLast",
     "onCommand:yarn-script.init",
+    "onCommand:yarn-script.outdated",
     "onCommand:yarn-script.removePackage",
     "onCommand:yarn-script.publish",
     "onCommand:yarn-script.raw",
@@ -88,6 +89,11 @@
       {
         "command": "yarn-script.init",
         "title": "Initialize Yarn Package",
+        "category": "Yarn"
+      },
+      {
+        "command": "yarn-script.outdated",
+        "title": "Run outdated",
         "category": "Yarn"
       },
       {
@@ -171,10 +177,11 @@
     ],
     "configuration": {
       "type": "object",
-      "title": "yarn VSCode Yarn",
+      "title": "yarn (VSCode Yarn)",
       "properties": {
         "yarn.runInTerminal": {
           "type": "boolean",
+          "scope": "resource",
           "default": true,
           "description": "Run yarn commands in a terminal, otherwise shows the output in the output panel"
         },
@@ -185,10 +192,13 @@
         },
         "yarn.packageJson": {
           "type": "string",
+          "scope": "resource",
+          "default": "package.json",
           "description": "Default package json path. relative to current project root"
         },
         "yarn.dontHideOutputOnSuccess": {
           "type": "boolean",
+          "scope": "resource",
           "default": true,
           "description": "Keep the output panel visible when yarn execution is successful (no effect with runInTerminal)"
         },
@@ -205,22 +215,23 @@
     "vscode:prepublish": "webpack --mode production",
     "webpack": "webpack --mode development",
     "webpack-dev": "webpack --mode development --watch",
-    "postinstall": "node ./node_modules/vscode/bin/install",
-    "tslint": "tslint src/*.ts"
+    "test-compile": "tsc -p ./",
+    "eslint": "eslint src/ .ts,.tsx"
   },
   "devDependencies": {
-    "typescript": "3.0.3",
-    "vscode": "^1.1.22",
-    "@types/node": "^7.0.43",
+    "@types/vscode": "^1.58.1",
+    "@types/node": "^12.12.0",
     "@types/mocha": "^2.2.42",
-    "ts-loader": "^4.4.2",
-    "tslint": "^5.11.0",
+    "@typescript-eslint/eslint-plugin": "^4.16.0",
+    "typescript": "^4.3.5",
+    "ts-loader": "^7.0.5",
+    "eslint": "^7.0.5",
     "webpack": "^4.39.1",
     "webpack-cli": "^3.3.0"
   },
   "dependencies": {
     "global": "^4.3.2",
     "run-in-terminal": "^0.0.3",
-    "tree-kill": "^1.2.0"
+    "tree-kill": "^1.2.2"
   }
 }

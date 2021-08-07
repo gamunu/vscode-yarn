@@ -1,9 +1,8 @@
 import { ChildProcess, exec } from 'child_process';
-import { workspace as Workspace, ViewColumn, window, Terminal } from 'vscode';
+import { window as Window, Terminal } from 'vscode';
 import { outputChannel } from './output';
 import { runInTerminal, Options } from 'run-in-terminal';
-import { useTerminal, getYarnBin, dontHideOutputOnSuccess, CommandArgument } from './utils';
-import * as Path from 'path';
+import { useTerminal, getYarnBin, dontHideOutputOnSuccess,  } from './utils';
 
 const kill = require('tree-kill');
 export let terminal: Terminal = null;
@@ -27,24 +26,8 @@ export function terminate(pid: number) {
 	}
 }
 
-export function runCommand(args: string[], arg?: CommandArgument) {
-	let cwd = Workspace.rootPath;
-
-	const confPackagejson = Workspace.getConfiguration('yarn')['packageJson'];
-
-	if (confPackagejson) {
-		cwd = Path.join(Workspace.rootPath, confPackagejson).replace(/package.json$/i, "");
-	}
-
-	const editor = window.activeTextEditor;
-	if (editor && editor.document.fileName.endsWith("package.json")) {
-		cwd = editor.document.fileName.replace(/package.json$/i, "");
-	}
-
-	// If the runCommand exected via Explorer contect menu
-	if (arg && arg.fsPath) {
-		cwd = arg.fsPath.replace(/package.json$/i, "");
-	}
+export function runCommand(args: string[], packageJson: string) {
+	let cwd = packageJson.replace(/package.json$/i, "");
 
 	const options = {
 		cwd: cwd,
@@ -52,7 +35,7 @@ export function runCommand(args: string[], arg?: CommandArgument) {
 	};
 
 	if (useTerminal()) {
-		if (typeof window.createTerminal === 'function') {
+		if (typeof Window.createTerminal === 'function') {
 			runCommandInIntegratedTerminal(args, cwd);
 		} else {
 			runCommandInTerminal(args, options);
@@ -68,10 +51,10 @@ function runCommandInTerminal(args: string[], options?: Options): void {
 
 function runCommandInIntegratedTerminal(args: string[], cwd: string): void {
 	const cmd_args = Array.from(args);
-	if (!terminal) {
-		terminal = window.createTerminal('Yarn');
+	if (!terminal || terminal.exitStatus) {
+		terminal = Window.createTerminal('Yarn');
 	}
-	terminal.show();
+	terminal.show(true);
 	if (cwd) {
 		// Replace single backslash with double backslash.
 		const textCwd = cwd.replace(/\\/g, '\\\\');
@@ -119,5 +102,5 @@ function runCommandInOutputWindow(args: string[], cwd: string) {
 
 	child.stderr.on('data', append);
 	child.stdout.on('data', append);
-	outputChannel.show(ViewColumn.Three);
+	outputChannel.show(true);
 }

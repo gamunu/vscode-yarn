@@ -1,10 +1,11 @@
 import { window as Window } from 'vscode';
-import { packageExists } from './utils';
+import { packageExists, pickPackageJson } from './utils';
 import * as Messages from './messages';
 import { runCommand } from './run-command';
 
-export function yarnRawCommand() {
-	if (!packageExists()) {
+export async function yarnRawCommand() {
+	let packageJson = await pickPackageJson()
+	if (!packageExists(packageJson)) {
 		Messages.noPackageError();
 		return;
 	}
@@ -22,6 +23,6 @@ export function yarnRawCommand() {
 
 			const args = value.split(' ');
 
-			runCommand(args);
+			runCommand(args, packageJson);
 		});
 }

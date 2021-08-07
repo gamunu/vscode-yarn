@@ -2,20 +2,22 @@ import * as Fs from 'fs';
 import * as Path from 'path';
 import { workspace as Workspace, window as Window } from 'vscode';
 import * as Messages from './messages';
-import { packageExists } from './utils';
+import { packageExists, pickPackageJson } from './utils';
 
-export default function () {
-	if (!Workspace.rootPath) {
+export default async function () {
+	let packageJson = await pickPackageJson()
+
+	if (packageJson == null) {
 		Messages.noProjectOpenError();
 		return;
 	}
 
-	if (packageExists()) {
+	if (packageExists(packageJson)) {
 		Messages.alreadyExistsError();
 		return;
 	}
 
-	const directory = Path.basename(Workspace.rootPath);
+	const directory = Path.basename(packageJson);
 
 	const options = {
 		name: directory,
@@ -105,16 +107,15 @@ export default function () {
 				options.license = value.toString();
 			}
 
-			const packageJson = JSON.stringify(options, null, 4);
-			const path = Path.join(Workspace.rootPath, 'package.json');
-			Fs.writeFile(path, packageJson, (err) => {
+			const content = JSON.stringify(options, null, 4);
+			Fs.writeFile(packageJson, content, (err) => {
 
 				if (err) {
 					Messages.cannotWriteError();
 				}
 				else {
 					Messages.createdInfo();
-					Workspace.openTextDocument(path).then((document) => {
+					Workspace.openTextDocument(packageJson).then((document) => {
 						Window.showTextDocument(document);
 					});
 				}
