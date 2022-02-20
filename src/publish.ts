@@ -8,7 +8,7 @@ export async function yarnPublish(arg: Uri) {
 	const cmd: string = 'publish';
 
 	// context menu wins always
-	if (arg.fsPath.length >= 0) {
+	if (arg !== undefined && arg.fsPath.length >= 0) {
 		packageJson = arg.fsPath;
 	} else { // fall back to pick
 		packageJson = await pickPackageJson();

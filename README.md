@@ -68,7 +68,7 @@ git clone git@github.com:gamunu/vscode-yarn.git gamunu.vscode-yarn
 
 ### Explorer context menu
 
-`yarn install` also available in the `package.json` file's explorer context menu.
+Few `yarn` commands also available in the `package.json` file's explorer context menu.
 
 ![Context menu](images/context.png)
 

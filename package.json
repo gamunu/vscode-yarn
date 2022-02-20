@@ -57,23 +57,23 @@
       },
       {
         "command": "yarn-script.terminate",
-        "title": "Terminate Running Yarn Script",
+        "title": "Terminate Running Script",
         "category": "Yarn"
       },
       {
         "command": "yarn-script.installPackages",
-        "title": "Install Yarn Packages",
+        "title": "Install Packages",
         "category": "Yarn",
         "icon": "./assets/install.png"
       },
       {
         "command": "yarn-script.addPackage",
-        "title": "Add and Save Dependency",
+        "title": "Add & Save Dependency",
         "category": "Yarn"
       },
       {
         "command": "yarn-script.addPackageDev",
-        "title": "Add and Save dev. Dependency",
+        "title": "Add & Save dev. Dependency",
         "category": "Yarn"
       },
       {
@@ -83,27 +83,27 @@
       },
       {
         "command": "yarn-script.runScriptLast",
-        "title": "Run Last Yarn Script",
+        "title": "Run Last Script",
         "category": "Yarn"
       },
       {
         "command": "yarn-script.init",
-        "title": "Initialize Yarn Package",
+        "title": "Initialize Package",
         "category": "Yarn"
       },
       {
         "command": "yarn-script.outdated",
-        "title": "Run outdated",
+        "title": "Outdated",
         "category": "Yarn"
       },
       {
         "command": "yarn-script.removePackage",
-        "title": "Uninstall Yarn Dependency",
+        "title": "Uninstall Dependency",
         "category": "Yarn"
       },
       {
         "command": "yarn-script.build",
-        "title": "Run Build",
+        "title": "Build",
         "category": "Yarn",
         "icon": "./assets/build.png"
       },
@@ -114,7 +114,7 @@
       },
       {
         "command": "yarn-script.raw",
-        "title": "Raw Yarn Command",
+        "title": "Raw Command",
         "category": "Yarn"
       }
     ],
@@ -133,28 +133,48 @@
           "submenu": "vscode.yarn"
         },
         {
-          "command": "yarn-script.addPackage",
+          "command": "yarn-script.test",
           "group": "navigation@2",
           "submenu": "vscode.yarn"
         },
         {
-          "command": "yarn-script.addPackages",
+          "command": "yarn-script.build",
           "group": "navigation@3",
           "submenu": "vscode.yarn"
         },
         {
-          "command": "yarn-script.addPackageDev",
+          "command": "yarn-script.start",
           "group": "navigation@4",
           "submenu": "vscode.yarn"
         },
         {
-          "command": "yarn-script.removePackage",
+          "command": "yarn-script.runScript",
           "group": "navigation@5",
           "submenu": "vscode.yarn"
         },
         {
-          "command": "yarn-script.publish",
+          "command": "yarn-script.addPackage",
           "group": "navigation@6",
+          "submenu": "vscode.yarn"
+        },
+        {
+          "command": "yarn-script.addPackageDev",
+          "group": "navigation@7",
+          "submenu": "vscode.yarn"
+        },
+        {
+          "command": "yarn-script.removePackage",
+          "group": "navigation@8",
+          "submenu": "vscode.yarn"
+        },
+        {
+          "command": "yarn-script.publish",
+          "group": "navigation@9",
+          "submenu": "vscode.yarn"
+        },
+        {
+          "command": "yarn-script.outdated",
+          "group": "navigation@10",
           "submenu": "vscode.yarn"
         }
       ],

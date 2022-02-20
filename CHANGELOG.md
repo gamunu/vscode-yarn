@@ -1,9 +1,13 @@
-## 2.0 - 07th of Augest, 2021
+## 2.1.0 - 21st of February, 2022
+
+* Add Explorer context menu submenus for additional Yarn commands.
+
+## 2.0.0 - 07th of August, 2021
 
 * Add WSL support
 * Add Multi-Workspace support
 
-## 1.7 - 08th of December, 2019
+## 1.7.0 - 08th of December, 2019
 
 * Fix for [Issue 11](https://github.com/gamunu/vscode-yarn/issues/11)
 * Add touchbar assets and update package.json.
