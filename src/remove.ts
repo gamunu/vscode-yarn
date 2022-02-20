@@ -1,14 +1,18 @@
-import { window as Window } from 'vscode';
+import { window as Window, Uri } from 'vscode';
 import { packageExists, pickPackageJson } from './utils';
 import * as Messages from './messages';
 import { runCommand } from './run-command';
 
-export function yarnRemovePackage() {
-	return _removePackage();
-}
+export async function yarnRemovePackage(arg: Uri) {
+	let packageJson: string = null
 
-const _removePackage = async function () {
-	let packageJson = await pickPackageJson()
+	// context menu wins always
+	if (arg.fsPath.length >= 0) {
+		packageJson = arg.fsPath;
+	} else { // fall back to pick
+		packageJson = await pickPackageJson()
+	}
+
 	if (!packageExists(packageJson)) {
 		Messages.noPackageError();
 		return;
@@ -31,4 +35,4 @@ const _removePackage = async function () {
 
 			runCommand(args, packageJson);
 		});
-};
+}

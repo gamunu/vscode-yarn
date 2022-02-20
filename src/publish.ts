@@ -1,14 +1,19 @@
-import { window as Window } from 'vscode';
+import { window as Window, Uri } from 'vscode';
 import { packageExists, pickPackageJson } from './utils';
 import * as Messages from './messages';
 import { runCommand } from './run-command';
 
-export function yarnPublish() {
-	_do('publish');
-}
+export async function yarnPublish(arg: Uri) {
+	let packageJson: string = null
+	let cmd: string = 'publish'
 
-const _do = async function (cmd: string) {
-	let packageJson = await pickPackageJson()
+	// context menu wins always
+	if (arg.fsPath.length >= 0) {
+		packageJson = arg.fsPath;
+	} else { // fall back to pick
+		packageJson = await pickPackageJson()
+	}
+
 	if (!packageExists(packageJson)) {
 		Messages.noPackageError();
 		return;

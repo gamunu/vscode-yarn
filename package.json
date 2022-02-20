@@ -2,7 +2,7 @@
   "name": "vscode-yarn",
   "displayName": "yarn",
   "description": "Yarn commands for VSCode",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "publisher": "gamunu",
   "icon": "yarn_icon.png",
   "engines": {
@@ -98,7 +98,7 @@
       },
       {
         "command": "yarn-script.removePackage",
-        "title": "Uninstall Dependency",
+        "title": "Uninstall Yarn Dependency",
         "category": "Yarn"
       },
       {
@@ -122,8 +122,40 @@
       "explorer/context": [
         {
           "when": "resourceFilename == 'package.json'",
+          "group": "navigation@1",
+          "submenu": "vscode.yarn"
+        }
+      ],
+      "vscode.yarn": [
+        {
           "command": "yarn-script.installPackages",
-          "group": "navigation@+1"
+          "group": "navigation@1",
+          "submenu": "vscode.yarn"
+        },
+        {
+          "command": "yarn-script.addPackage",
+          "group": "navigation@2",
+          "submenu": "vscode.yarn"
+        },
+        {
+          "command": "yarn-script.addPackages",
+          "group": "navigation@3",
+          "submenu": "vscode.yarn"
+        },
+        {
+          "command": "yarn-script.addPackageDev",
+          "group": "navigation@4",
+          "submenu": "vscode.yarn"
+        },
+        {
+          "command": "yarn-script.removePackage",
+          "group": "navigation@5",
+          "submenu": "vscode.yarn"
+        },
+        {
+          "command": "yarn-script.publish",
+          "group": "navigation@6",
+          "submenu": "vscode.yarn"
         }
       ],
       "touchBar": [
@@ -149,6 +181,12 @@
         }
       ]
     },
+    "submenus": [
+      {
+        "id": "vscode.yarn",
+        "label": "Yarn"
+      }
+    ],
     "keybindings": [
       {
         "command": "yarn-script.runScript",
@@ -216,16 +254,17 @@
     "webpack": "webpack --mode development",
     "webpack-dev": "webpack --mode development --watch",
     "test-compile": "tsc -p ./",
-    "eslint": "eslint src/ .ts,.tsx"
+    "eslint": "eslint -c .eslintrc.js --ext .ts src/*.ts"
   },
   "devDependencies": {
-    "@types/vscode": "^1.58.1",
-    "@types/node": "^12.12.0",
     "@types/mocha": "^2.2.42",
-    "@typescript-eslint/eslint-plugin": "^4.16.0",
-    "typescript": "^4.3.5",
-    "ts-loader": "^7.0.5",
+    "@types/node": "^12.12.0",
+    "@types/vscode": "^1.58.1",
+    "@typescript-eslint/eslint-plugin": "^5.12.0",
+    "@typescript-eslint/parser": "^5.12.0",
     "eslint": "^7.0.5",
+    "ts-loader": "^7.0.5",
+    "typescript": "^4.5.5",
     "webpack": "^4.39.1",
     "webpack-cli": "^3.3.0"
   },

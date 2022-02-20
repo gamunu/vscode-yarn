@@ -3,11 +3,6 @@ import * as Path from 'path';
 import * as Messages from './messages';
 import { workspace as Workspace, window as Window, QuickPickItem } from 'vscode';
 
-// Explorer context menu command argument
-export interface CommandArgument {
-	fsPath: string;
-}
-
 interface PackageJsonRoot {
 	fsPath: string;
 	name: string;

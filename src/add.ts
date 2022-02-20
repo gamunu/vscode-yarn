@@ -1,10 +1,18 @@
-import { window as Window } from 'vscode';
+import { window as Window, Uri } from 'vscode';
 import { packageExists, pickPackageJson } from './utils';
 import * as Messages from './messages';
 import { runCommand } from './run-command';
 
-export async function yarnAddPackages() {
-	let packageJson = await pickPackageJson()
+export async function yarnAddPackages(arg: Uri) {
+	let packageJson: string = null
+
+	// context menu wins always
+	if (arg.fsPath.length >= 0) {
+		packageJson = arg.fsPath;
+	} else { // fall back to pick
+		packageJson = await pickPackageJson()
+	}
+
 	if (!packageExists(packageJson)) {
 		Messages.noPackageError();
 		return;
@@ -13,16 +21,24 @@ export async function yarnAddPackages() {
 	runCommand(['add'], packageJson);
 }
 
-export function yarnAddPackage() {
-	return _addPackage(false);
+export function yarnAddPackage(arg: Uri) {
+	return _addPackage(false, arg);
 }
 
-export function yarnAddPackageDev() {
-	return _addPackage(true);
+export function yarnAddPackageDev(arg: Uri) {
+	return _addPackage(true, arg);
 }
 
-const _addPackage = async function (dev: boolean) {
-	let packageJson = await pickPackageJson()
+const _addPackage = async function (dev: boolean, arg: Uri) {
+	let packageJson: string = null
+
+	// context menu wins always
+	if (arg.fsPath.length >= 0) {
+		packageJson = arg.fsPath;
+	} else { // fall back to pick
+		packageJson = await pickPackageJson()
+	}
+
 	if (!packageExists(packageJson)) {
 		Messages.noPackageError();
 		return;
