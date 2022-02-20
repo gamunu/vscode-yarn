@@ -30,6 +30,10 @@ module.exports = {
             "error",
             "always"
         ],
+        "@typescript-eslint/class-name-casing": [
+            "off",
+            "always"
+        ],
         "curly": "error",
         "eqeqeq": [
             "error",

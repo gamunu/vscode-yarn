@@ -4,14 +4,14 @@ import * as Messages from './messages';
 import { runCommand } from './run-command';
 
 export async function yarnPublish(arg: Uri) {
-	let packageJson: string = null
-	let cmd: string = 'publish'
+	let packageJson: string = null;
+	const cmd: string = 'publish';
 
 	// context menu wins always
 	if (arg.fsPath.length >= 0) {
 		packageJson = arg.fsPath;
 	} else { // fall back to pick
-		packageJson = await pickPackageJson()
+		packageJson = await pickPackageJson();
 	}
 
 	if (!packageExists(packageJson)) {

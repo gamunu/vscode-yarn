@@ -5,12 +5,12 @@ import { runCommand } from './run-command';
 import { pickPackageJson, packageExists } from './utils';
 
 let lastScript: {
-	packageJson: string,
-	script: string
+	packageJson: string;
+	script: string;
 };
 
 export async function yarnRunScript() {
-	let packageJson = await pickPackageJson()
+	const packageJson = await pickPackageJson();
 	if (!packageExists(packageJson)) {
 		Messages.noPackageError();
 		return;
@@ -35,7 +35,7 @@ export async function yarnRunScript() {
 }
 
 export async function yarnTest() {
-	let packageJson = await pickPackageJson()
+	const packageJson = await pickPackageJson();
 	if (!packageExists(packageJson)) {
 		Messages.noPackageError();
 		return;
@@ -59,7 +59,7 @@ export async function yarnTest() {
 }
 
 export async function yarnStart() {
-	let packageJson = await pickPackageJson()
+	const packageJson = await pickPackageJson();
 	if (!packageExists(packageJson)) {
 		Messages.noPackageError();
 		return;
@@ -83,7 +83,7 @@ export async function yarnStart() {
 }
 
 export async function yarnBuild() {
-	let packageJson = await pickPackageJson()
+	const packageJson = await pickPackageJson();
 	if (!packageExists(packageJson)) {
 		Messages.noPackageError();
 		return;
@@ -108,9 +108,9 @@ export async function yarnBuild() {
 
 export async function yarnRunLastScript() {
 	if (lastScript) {
-		let rootPath = lastScript.packageJson
+		const rootPath = lastScript.packageJson;
 
-		if (rootPath != null && !packageExists(rootPath)) {
+		if (rootPath !== null && !packageExists(rootPath)) {
 			Messages.noPackageError();
 			return;
 		}

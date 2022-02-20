@@ -3,7 +3,7 @@ import * as Messages from './messages';
 import { runCommand } from './run-command';
 
 export async function yarnOutdated() {
-	let packageJson = await pickPackageJson()
+	const packageJson = await pickPackageJson();
 	if (!packageExists(packageJson)) {
 		Messages.noPackageError();
 		return;

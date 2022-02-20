@@ -4,13 +4,13 @@ import * as Messages from './messages';
 import { runCommand } from './run-command';
 
 export async function yarnRemovePackage(arg: Uri) {
-	let packageJson: string = null
+	let packageJson: string = null;
 
 	// context menu wins always
 	if (arg.fsPath.length >= 0) {
 		packageJson = arg.fsPath;
 	} else { // fall back to pick
-		packageJson = await pickPackageJson()
+		packageJson = await pickPackageJson();
 	}
 
 	if (!packageExists(packageJson)) {
