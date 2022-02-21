@@ -50,6 +50,12 @@ export async function pickPackageJson(): Promise<Readonly<string>> {
 	return undefined;
 }
 
+/**
+ * Check the file exisit in the path
+ *
+ * @param packageJson string location for the file
+ * @returns boolean
+ */
 export function packageExists(packageJson: string) {
 	try {
 		const stat = Fs.statSync(packageJson);
@@ -60,6 +66,13 @@ export function packageExists(packageJson: string) {
 	}
 }
 
+/**
+ * Get the package.json location from context menu or prompt
+ * to pick the project location.
+ *
+ * @param arg path to the file where command orignated
+ * @returns
+ */
 export async function getPackageJson(arg: Uri) {
 	let packageJson: string = null;
 
@@ -77,14 +90,30 @@ export async function getPackageJson(arg: Uri) {
 	return packageJson;
 }
 
+/**
+ * Get the configured value for the selection between output
+ * window and terminal window.
+ *
+ * @returns WorkspaceConfiguration boolean
+ */
 export function useTerminal() {
 	return Workspace.getConfiguration('yarn')['runInTerminal'];
 }
 
+/**
+ * Get the configured yarn binary location. If not defualt to 'yarn'
+ *
+ * @returns WorkspaceConfiguration path to the yarn binary
+ */
 export function getYarnBin() {
 	return Workspace.getConfiguration('yarn')['bin'] || 'yarn';
 }
 
+/**
+ * Get the configuration value for the output window autohide feature
+ *
+ * @returns WorkspaceConfiguration boolen value
+ */
 export function dontHideOutputOnSuccess() {
 	return Workspace.getConfiguration('yarn')['dontHideOutputOnSuccess'];
 }
