@@ -1,22 +1,12 @@
 import { window as Window, Uri } from 'vscode';
-import { packageExists, pickPackageJson } from './utils';
+import { getPackageJson } from './utils';
 import * as Messages from './messages';
 import { runCommand } from './run-command';
 
 export async function yarnAddPackages(arg: Uri) {
-	let packageJson: string = null;
+	const packageJson: string = await getPackageJson(arg);
 
-	// context menu wins always
-	if (arg !== undefined && arg.fsPath.length >= 0) {
-		packageJson = arg.fsPath;
-	} else { // fall back to pick
-		packageJson = await pickPackageJson();
-	}
-
-	if (!packageExists(packageJson)) {
-		Messages.noPackageError();
-		return;
-	}
+	if (packageJson === null) { return; }
 
 	runCommand(['add'], packageJson);
 }
@@ -30,19 +20,9 @@ export function yarnAddPackageDev(arg: Uri) {
 }
 
 const _addPackage = async function (dev: boolean, arg: Uri) {
-	let packageJson: string = null;
+	const packageJson: string = await getPackageJson(arg);
 
-	// context menu wins always
-	if (arg !== undefined && arg.fsPath.length >= 0) {
-		packageJson = arg.fsPath;
-	} else { // fall back to pick
-		packageJson = await pickPackageJson();
-	}
-
-	if (!packageExists(packageJson)) {
-		Messages.noPackageError();
-		return;
-	}
+	if (packageJson === null) { return; }
 
 	Window.showInputBox({
 		prompt: 'Package to add',

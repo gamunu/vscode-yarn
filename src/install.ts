@@ -1,21 +1,11 @@
-import { packageExists, pickPackageJson } from './utils';
+import { getPackageJson } from './utils';
 import { Uri } from 'vscode';
-import * as Messages from './messages';
 import { runCommand } from './run-command';
 
 export async function yarnInstallPackages(arg: Uri) {
-	let packageJson: string = null;
+	const packageJson: string = await getPackageJson(arg);
 
-	// context menu wins always
-	if (arg !== undefined && arg.fsPath.length >= 0) {
-		packageJson = arg.fsPath;
-	} else { // fall back to pick
-		packageJson = await pickPackageJson();
-	}
+	if (packageJson === null) { return; }
 
-	if (!packageExists(packageJson)) {
-		Messages.noPackageError();
-		return;
-	}
 	runCommand(['install'], packageJson);
 }

@@ -2,7 +2,7 @@ import * as Fs from 'fs';
 import { window as Window, Uri, QuickPickItem } from 'vscode';
 import * as Messages from './messages';
 import { runCommand } from './run-command';
-import { pickPackageJson, packageExists } from './utils';
+import { packageExists, getPackageJson } from './utils';
 
 let lastScript: {
 	packageJson: string;
@@ -10,19 +10,9 @@ let lastScript: {
 };
 
 export async function yarnRunScript(arg: Uri) {
-	let packageJson: string = null;
+	const packageJson: string = await getPackageJson(arg);
 
-	// context menu wins always
-	if (arg !== undefined && arg.fsPath.length >= 0) {
-		packageJson = arg.fsPath;
-	} else { // fall back to pick
-		packageJson = await pickPackageJson();
-	}
-
-	if (!packageExists(packageJson)) {
-		Messages.noPackageError();
-		return;
-	}
+	if (packageJson === null) { return; }
 
 	const scripts = readScripts(packageJson);
 	if (!scripts) {
@@ -43,19 +33,9 @@ export async function yarnRunScript(arg: Uri) {
 }
 
 export async function yarnTest(arg: Uri) {
-	let packageJson: string = null;
+	const packageJson: string = await getPackageJson(arg);
 
-	// context menu wins always
-	if (arg !== undefined && arg.fsPath.length >= 0) {
-		packageJson = arg.fsPath;
-	} else { // fall back to pick
-		packageJson = await pickPackageJson();
-	}
-
-	if (!packageExists(packageJson)) {
-		Messages.noPackageError();
-		return;
-	}
+	if (packageJson === null) { return; }
 
 	const scripts = readScripts(packageJson);
 	if (!scripts) {
@@ -75,19 +55,9 @@ export async function yarnTest(arg: Uri) {
 }
 
 export async function yarnStart(arg: Uri) {
-	let packageJson: string = null;
+	const packageJson: string = await getPackageJson(arg);
 
-	// context menu wins always
-	if (arg !== undefined && arg.fsPath.length >= 0) {
-		packageJson = arg.fsPath;
-	} else { // fall back to pick
-		packageJson = await pickPackageJson();
-	}
-
-	if (!packageExists(packageJson)) {
-		Messages.noPackageError();
-		return;
-	}
+	if (packageJson === null) { return; }
 
 	const scripts = readScripts(packageJson);
 	if (!scripts) {
@@ -107,14 +77,9 @@ export async function yarnStart(arg: Uri) {
 }
 
 export async function yarnBuild(arg: Uri) {
-	let packageJson: string = null;
+	const packageJson: string = await getPackageJson(arg);
 
-	// context menu wins always
-	if (arg !== undefined && arg.fsPath.length >= 0) {
-		packageJson = arg.fsPath;
-	} else { // fall back to pick
-		packageJson = await pickPackageJson();
-	}
+	if (packageJson === null) { return; }
 
 	const scripts = readScripts(packageJson);
 	if (!scripts) {

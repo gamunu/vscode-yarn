@@ -78,7 +78,7 @@
       },
       {
         "command": "yarn-script.runScript",
-        "title": "Run Yarn Script",
+        "title": "Run Script",
         "category": "Yarn"
       },
       {

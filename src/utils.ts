@@ -1,7 +1,7 @@
 import * as Fs from 'fs';
 import * as Path from 'path';
 import * as Messages from './messages';
-import { workspace as Workspace, window as Window, QuickPickItem } from 'vscode';
+import { workspace as Workspace, window as Window, QuickPickItem, Uri } from 'vscode';
 
 interface PackageJsonRoot {
 	fsPath: string;
@@ -58,6 +58,23 @@ export function packageExists(packageJson: string) {
 	catch (ignored) {
 		return false;
 	}
+}
+
+export async function getPackageJson(arg: Uri) {
+	let packageJson: string = null;
+
+	// context menu wins always
+	if (arg !== undefined && arg.fsPath.length >= 0) {
+		packageJson = arg.fsPath;
+	} else { // fall back to pick
+		packageJson = await pickPackageJson();
+	}
+
+	if (!packageExists(packageJson)) {
+		Messages.noPackageError();
+	}
+
+	return packageJson;
 }
 
 export function useTerminal() {
