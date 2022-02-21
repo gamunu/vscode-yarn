@@ -1,6 +1,7 @@
 ## 2.1.0 - 21st of February, 2022
 
 * Add Explorer context menu submenus for additional Yarn commands.
+`Install Packages`, `Test`, `Build`, `Start`, `Run Script`, `Add & Save Package`, `Add & Save Dev Package`, `Remove Package`, `Publish`, `Outdated`
 
 ## 2.0.0 - 07th of August, 2021
 
