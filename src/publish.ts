@@ -1,18 +1,13 @@
-import { window as Window } from 'vscode';
-import { packageExists, pickPackageJson } from './utils';
+import { window as Window, Uri } from 'vscode';
+import { getPackageJson } from './utils';
 import * as Messages from './messages';
 import { runCommand } from './run-command';
 
-export function yarnPublish() {
-	_do('publish');
-}
+export async function yarnPublish(arg: Uri) {
+	const cmd: string = 'publish';
+	const packageJson: string = await getPackageJson(arg);
 
-const _do = async function (cmd: string) {
-	let packageJson = await pickPackageJson()
-	if (!packageExists(packageJson)) {
-		Messages.noPackageError();
-		return;
-	}
+	if (packageJson === null) { return; }
 
 	Window.showInputBox({
 		prompt: 'Optional tag (enter to skip tag)',

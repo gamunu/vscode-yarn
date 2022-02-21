@@ -1,18 +1,12 @@
-import { window as Window } from 'vscode';
-import { packageExists, pickPackageJson } from './utils';
+import { window as Window, Uri } from 'vscode';
+import { getPackageJson } from './utils';
 import * as Messages from './messages';
 import { runCommand } from './run-command';
 
-export function yarnRemovePackage() {
-	return _removePackage();
-}
+export async function yarnRemovePackage(arg: Uri) {
+	const packageJson: string = await getPackageJson(arg);
 
-const _removePackage = async function () {
-	let packageJson = await pickPackageJson()
-	if (!packageExists(packageJson)) {
-		Messages.noPackageError();
-		return;
-	}
+	if (packageJson === null) { return; }
 
 	Window.showInputBox({
 		prompt: 'Package to remove',
@@ -31,4 +25,4 @@ const _removePackage = async function () {
 
 			runCommand(args, packageJson);
 		});
-};
+}

@@ -27,7 +27,7 @@ export function terminate(pid: number) {
 }
 
 export function runCommand(args: string[], packageJson: string) {
-	let cwd = packageJson.replace(/package.json$/i, "");
+	const cwd = packageJson.replace(/package.json$/i, "");
 
 	const options = {
 		cwd: cwd,

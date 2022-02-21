@@ -5,9 +5,9 @@ import * as Messages from './messages';
 import { packageExists, pickPackageJson } from './utils';
 
 export default async function () {
-	let packageJson = await pickPackageJson()
+	const packageJson = await pickPackageJson();
 
-	if (packageJson == null) {
+	if (packageJson === null) {
 		Messages.noProjectOpenError();
 		return;
 	}

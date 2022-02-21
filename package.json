@@ -2,7 +2,7 @@
   "name": "vscode-yarn",
   "displayName": "yarn",
   "description": "Yarn commands for VSCode",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "publisher": "gamunu",
   "icon": "yarn_icon.png",
   "engines": {
@@ -57,43 +57,43 @@
       },
       {
         "command": "yarn-script.terminate",
-        "title": "Terminate Running Yarn Script",
+        "title": "Terminate Running Script",
         "category": "Yarn"
       },
       {
         "command": "yarn-script.installPackages",
-        "title": "Install Yarn Packages",
+        "title": "Install Packages",
         "category": "Yarn",
         "icon": "./assets/install.png"
       },
       {
         "command": "yarn-script.addPackage",
-        "title": "Add and Save Dependency",
+        "title": "Add & Save Dependency",
         "category": "Yarn"
       },
       {
         "command": "yarn-script.addPackageDev",
-        "title": "Add and Save dev. Dependency",
+        "title": "Add & Save dev. Dependency",
         "category": "Yarn"
       },
       {
         "command": "yarn-script.runScript",
-        "title": "Run Yarn Script",
+        "title": "Run Script",
         "category": "Yarn"
       },
       {
         "command": "yarn-script.runScriptLast",
-        "title": "Run Last Yarn Script",
+        "title": "Run Last Script",
         "category": "Yarn"
       },
       {
         "command": "yarn-script.init",
-        "title": "Initialize Yarn Package",
+        "title": "Initialize Package",
         "category": "Yarn"
       },
       {
         "command": "yarn-script.outdated",
-        "title": "Run outdated",
+        "title": "Outdated",
         "category": "Yarn"
       },
       {
@@ -103,7 +103,7 @@
       },
       {
         "command": "yarn-script.build",
-        "title": "Run Build",
+        "title": "Build",
         "category": "Yarn",
         "icon": "./assets/build.png"
       },
@@ -114,7 +114,7 @@
       },
       {
         "command": "yarn-script.raw",
-        "title": "Raw Yarn Command",
+        "title": "Raw Command",
         "category": "Yarn"
       }
     ],
@@ -122,8 +122,60 @@
       "explorer/context": [
         {
           "when": "resourceFilename == 'package.json'",
+          "group": "navigation@1",
+          "submenu": "vscode.yarn"
+        }
+      ],
+      "vscode.yarn": [
+        {
           "command": "yarn-script.installPackages",
-          "group": "navigation@+1"
+          "group": "navigation@1",
+          "submenu": "vscode.yarn"
+        },
+        {
+          "command": "yarn-script.test",
+          "group": "navigation@2",
+          "submenu": "vscode.yarn"
+        },
+        {
+          "command": "yarn-script.build",
+          "group": "navigation@3",
+          "submenu": "vscode.yarn"
+        },
+        {
+          "command": "yarn-script.start",
+          "group": "navigation@4",
+          "submenu": "vscode.yarn"
+        },
+        {
+          "command": "yarn-script.runScript",
+          "group": "navigation@5",
+          "submenu": "vscode.yarn"
+        },
+        {
+          "command": "yarn-script.addPackage",
+          "group": "navigation@6",
+          "submenu": "vscode.yarn"
+        },
+        {
+          "command": "yarn-script.addPackageDev",
+          "group": "navigation@7",
+          "submenu": "vscode.yarn"
+        },
+        {
+          "command": "yarn-script.removePackage",
+          "group": "navigation@8",
+          "submenu": "vscode.yarn"
+        },
+        {
+          "command": "yarn-script.publish",
+          "group": "navigation@9",
+          "submenu": "vscode.yarn"
+        },
+        {
+          "command": "yarn-script.outdated",
+          "group": "navigation@10",
+          "submenu": "vscode.yarn"
         }
       ],
       "touchBar": [
@@ -149,6 +201,12 @@
         }
       ]
     },
+    "submenus": [
+      {
+        "id": "vscode.yarn",
+        "label": "Yarn"
+      }
+    ],
     "keybindings": [
       {
         "command": "yarn-script.runScript",
@@ -216,16 +274,17 @@
     "webpack": "webpack --mode development",
     "webpack-dev": "webpack --mode development --watch",
     "test-compile": "tsc -p ./",
-    "eslint": "eslint src/ .ts,.tsx"
+    "eslint": "eslint -c .eslintrc.js --ext .ts src/*.ts"
   },
   "devDependencies": {
-    "@types/vscode": "^1.58.1",
-    "@types/node": "^12.12.0",
     "@types/mocha": "^2.2.42",
-    "@typescript-eslint/eslint-plugin": "^4.16.0",
-    "typescript": "^4.3.5",
-    "ts-loader": "^7.0.5",
+    "@types/node": "^12.12.0",
+    "@types/vscode": "^1.58.1",
+    "@typescript-eslint/eslint-plugin": "^5.12.0",
+    "@typescript-eslint/parser": "^5.12.0",
     "eslint": "^7.0.5",
+    "ts-loader": "^7.0.5",
+    "typescript": "^4.5.5",
     "webpack": "^4.39.1",
     "webpack-cli": "^3.3.0"
   },

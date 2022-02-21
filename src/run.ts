@@ -1,20 +1,18 @@
 import * as Fs from 'fs';
-import { window as Window, QuickPickItem } from 'vscode';
+import { window as Window, Uri, QuickPickItem } from 'vscode';
 import * as Messages from './messages';
 import { runCommand } from './run-command';
-import { pickPackageJson, packageExists } from './utils';
+import { packageExists, getPackageJson } from './utils';
 
 let lastScript: {
-	packageJson: string,
-	script: string
+	packageJson: string;
+	script: string;
 };
 
-export async function yarnRunScript() {
-	let packageJson = await pickPackageJson()
-	if (!packageExists(packageJson)) {
-		Messages.noPackageError();
-		return;
-	}
+export async function yarnRunScript(arg: Uri) {
+	const packageJson: string = await getPackageJson(arg);
+
+	if (packageJson === null) { return; }
 
 	const scripts = readScripts(packageJson);
 	if (!scripts) {
@@ -34,12 +32,10 @@ export async function yarnRunScript() {
 	});
 }
 
-export async function yarnTest() {
-	let packageJson = await pickPackageJson()
-	if (!packageExists(packageJson)) {
-		Messages.noPackageError();
-		return;
-	}
+export async function yarnTest(arg: Uri) {
+	const packageJson: string = await getPackageJson(arg);
+
+	if (packageJson === null) { return; }
 
 	const scripts = readScripts(packageJson);
 	if (!scripts) {
@@ -58,12 +54,10 @@ export async function yarnTest() {
 	runCommand(['run', 'test'], packageJson);
 }
 
-export async function yarnStart() {
-	let packageJson = await pickPackageJson()
-	if (!packageExists(packageJson)) {
-		Messages.noPackageError();
-		return;
-	}
+export async function yarnStart(arg: Uri) {
+	const packageJson: string = await getPackageJson(arg);
+
+	if (packageJson === null) { return; }
 
 	const scripts = readScripts(packageJson);
 	if (!scripts) {
@@ -82,12 +76,10 @@ export async function yarnStart() {
 	runCommand(['run', 'start'], packageJson);
 }
 
-export async function yarnBuild() {
-	let packageJson = await pickPackageJson()
-	if (!packageExists(packageJson)) {
-		Messages.noPackageError();
-		return;
-	}
+export async function yarnBuild(arg: Uri) {
+	const packageJson: string = await getPackageJson(arg);
+
+	if (packageJson === null) { return; }
 
 	const scripts = readScripts(packageJson);
 	if (!scripts) {
@@ -108,9 +100,9 @@ export async function yarnBuild() {
 
 export async function yarnRunLastScript() {
 	if (lastScript) {
-		let rootPath = lastScript.packageJson
+		const rootPath = lastScript.packageJson;
 
-		if (rootPath != null && !packageExists(rootPath)) {
+		if (rootPath !== null && !packageExists(rootPath)) {
 			Messages.noPackageError();
 			return;
 		}
