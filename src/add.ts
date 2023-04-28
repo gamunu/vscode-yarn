@@ -3,6 +3,12 @@ import { getPackageJson } from './utils';
 import * as Messages from './messages';
 import { runCommand } from './run-command';
 
+/**
+ * Add packages to the project using yarn add command
+ *
+ * @param arg path to the file where command orignated
+ * @returns void
+ */
 export async function yarnAddPackages(arg: Uri) {
 	const packageJson: string = await getPackageJson(arg);
 
@@ -11,14 +17,33 @@ export async function yarnAddPackages(arg: Uri) {
 	runCommand(['add'], packageJson);
 }
 
+/**
+ * Add packages to the project using yarn add command
+ *
+ * @param arg path to the file where command orignated
+ * @returns void
+ */
 export function yarnAddPackage(arg: Uri) {
 	return _addPackage(false, arg);
 }
 
+/**
+ * Add packages to the project using yarn add command
+ * with --dev option
+ * @param arg path to the file where command orignated
+ * @returns void
+ */
 export function yarnAddPackageDev(arg: Uri) {
 	return _addPackage(true, arg);
 }
 
+/**
+ * Add packages to the project using yarn add command with --dev option
+ *
+ * @param dev boolean
+ * @param arg path to the file where command orignated
+ * @returns void
+ */
 const _addPackage = async function (dev: boolean, arg: Uri) {
 	const packageJson: string = await getPackageJson(arg);
 

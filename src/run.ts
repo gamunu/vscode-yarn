@@ -9,6 +9,12 @@ let lastScript: {
 	script: string;
 };
 
+/**
+ * Read scripts from package.json file
+ *
+ * @param arg path to the file where command orignated
+ * @returns void
+ */
 export async function yarnRunScript(arg: Uri) {
 	const packageJson: string = await getPackageJson(arg);
 
@@ -32,6 +38,12 @@ export async function yarnRunScript(arg: Uri) {
 	});
 }
 
+/**
+ * Read scripts from package.json file
+ *
+ * @param arg path to the file where command orignated
+ * @returns void
+ */
 export async function yarnTest(arg: Uri) {
 	const packageJson: string = await getPackageJson(arg);
 

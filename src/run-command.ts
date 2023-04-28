@@ -64,6 +64,12 @@ function runCommandInIntegratedTerminal(args: string[], cwd: string): void {
 	terminal.sendText(cmd_args.join(' '));
 }
 
+/**
+ * Run command in output window
+ *
+ * @param args command arguments
+ * @param cwd current working directory
+ */
 function runCommandInOutputWindow(args: string[], cwd: string) {
 	const cmd = getYarnBin() + ' ' + args.join(' ');
 

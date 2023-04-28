@@ -3,6 +3,11 @@ import { packageExists, pickPackageJson } from './utils';
 import * as Messages from './messages';
 import { runCommand } from './run-command';
 
+/**
+ * Run yarn command
+ *
+ * @returns void
+ */
 export async function yarnRawCommand() {
 	const packageJson = await pickPackageJson();
 	if (!packageExists(packageJson)) {

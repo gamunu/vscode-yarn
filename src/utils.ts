@@ -8,6 +8,11 @@ interface PackageJsonRoot {
 	name: string;
 }
 
+/**
+ * Read scripts from package.json file and return them as an object
+ *
+ * @returns object
+ */
 export async function pickPackageJson(): Promise<Readonly<string>> {
 	// if active text editor is a package.json turn the path for it
 	const editor = Window.activeTextEditor;
