@@ -1,0 +1,99 @@
+name: VSCode Extension CI
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - "v*"
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: write
+
+jobs:
+  test:
+    name: Run unit tests
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Install Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: 16.x
+
+    - run: |
+          npm install
+          npm install -g vsce
+          npm run test-compile
+
+  release:
+    if: "!contains(github.event.head_commit.message, 'skip ci')"
+    needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.VSCODE_TOKEN }}
+        if: github.event_name != 'pull_request'
+
+      - name: Setup Git
+        run: |
+          git config user.name "Gamunu Balagalla"
+          git config user.email "4501687+gamunu@users.noreply.github.com"
+        if: github.event_name != 'pull_request'
+
+      - name: create changelog
+        id: changelog
+        uses: TriPSs/conventional-changelog-action@v3
+        with:
+          github-token: ${{ secrets.VSCODE_TOKEN }}
+          release-count: "0"
+        if: github.event_name != 'pull_request'
+
+      - name: create release
+        uses: actions/create-release@v1
+        if: ${{ steps.changelog.outputs.skipped == 'false' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.VSCODE_TOKEN }}
+        with:
+          tag_name: ${{ steps.changelog.outputs.tag }}
+          release_name: ${{ steps.changelog.outputs.tag }}
+          body: ${{ steps.changelog.outputs.clean_changelog }}
+    outputs:
+      relVer: ${{ steps.changelog.outputs.tag }}
+
+  publish:
+    needs: [release]
+    name: Publish to VSCode Marketplace
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 16.x
+
+      - name: compile typescript
+        run: |
+             npm install
+             npm run webpack
+
+      - name: Build the extension
+        run: |
+             npm install
+             npm install -g vsce
+             vsce package
+
+#     - name: Publish to marketplace
+#       run: vsce publish -p ${{ secrets.MARKETPLACE_SECRET }}
