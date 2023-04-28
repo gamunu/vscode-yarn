@@ -4,6 +4,11 @@ import { workspace as Workspace, window as Window } from 'vscode';
 import * as Messages from './messages';
 import { packageExists, pickPackageJson } from './utils';
 
+/**
+ * Initialize a new package.json file
+ *
+ * @returns void
+ */
 export default async function () {
 	const packageJson = await pickPackageJson();
 

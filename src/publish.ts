@@ -3,6 +3,12 @@ import { getPackageJson } from './utils';
 import * as Messages from './messages';
 import { runCommand } from './run-command';
 
+/**
+ * Publish package to the registry using yarn publish command
+ *
+ * @param arg path to the file where command orignated
+ * @returns void
+ */
 export async function yarnPublish(arg: Uri) {
 	const cmd: string = 'publish';
 	const packageJson: string = await getPackageJson(arg);

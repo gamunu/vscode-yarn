@@ -11,6 +11,11 @@ import { yarnRawCommand } from './raw';
 import yarnTerminate from './terminate';
 import { yarnOutdated } from './outdated';
 
+/**
+ * Activate the extension and register all commands and events
+ *
+ * @param context ExtensionContext
+ */
 export const activate = function (context: ExtensionContext) {
 	const disposables = [
 		Commands.registerCommand('yarn-script.installPackages', yarnInstallPackages),
@@ -33,6 +38,11 @@ export const activate = function (context: ExtensionContext) {
 	context.subscriptions.push(...disposables, outputChannel);
 };
 
+/**
+ * Deactivate the extension
+ * @returns void
+ * @export deactivate
+ */
 export function deactivate() {
 	if (terminal) {
 		terminal.dispose();
