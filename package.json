@@ -277,7 +277,7 @@
     "eslint": "eslint -c .eslintrc.js --ext .ts src/*.ts"
   },
   "devDependencies": {
-    "@types/mocha": "^2.2.42",
+    "@types/mocha": "^10.0.0",
     "@types/node": "^16.11.7",
     "@types/vscode": "^1.58.1",
     "@typescript-eslint/eslint-plugin": "^5.12.0",
