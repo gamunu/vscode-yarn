@@ -6,7 +6,7 @@
   "publisher": "gamunu",
   "icon": "yarn_icon.png",
   "engines": {
-    "vscode": "^1.58.1"
+    "vscode": "^2023.0.0"
   },
   "categories": [
     "Other"
