@@ -6,7 +6,8 @@
   "publisher": "gamunu",
   "icon": "yarn_icon.png",
   "engines": {
-    "vscode": "^1.58.1"
+    "vscode": "^1.58.1",
+    "node": ">=18.0.0"
   },
   "categories": [
     "Other"
@@ -375,7 +376,7 @@
   },
   "devDependencies": {
     "@types/mocha": "^10.0.0",
-    "@types/node": "^18.0.0",
+    "@types/node": "^20.0.0",
     "@types/vscode": "^1.58.1",
     "@typescript-eslint/eslint-plugin": "^5.12.0",
     "@typescript-eslint/parser": "^5.12.0",
