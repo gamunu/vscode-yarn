@@ -6,7 +6,7 @@
   "publisher": "gamunu",
   "icon": "yarn_icon.png",
   "engines": {
-    "vscode": "^1.75.0",
+    "vscode": "^1.99.1",
     "node": ">=18.0.0"
   },
   "categories": [
@@ -23,6 +23,30 @@
   },
   "keywords": [
     "multi-root ready"
+  ],
+  "activationEvents": [
+    "onCommand:yarn-script.installPackages",
+    "onCommand:yarn-script.addPackages",
+    "onCommand:yarn-script.addPackage",
+    "onCommand:yarn-script.addPackageDev",
+    "onCommand:yarn-script.runScript",
+    "onCommand:yarn-script.runScriptLast",
+    "onCommand:yarn-script.init",
+    "onCommand:yarn-script.outdated",
+    "onCommand:yarn-script.removePackage",
+    "onCommand:yarn-script.publish",
+    "onCommand:yarn-script.raw",
+    "onCommand:yarn-script.terminate",
+    "onCommand:yarn-script.start",
+    "onCommand:yarn-script.build",
+    "onCommand:yarn-script.test",
+    "onCommand:yarn-script.searchPackages",
+    "onCommand:yarn-script.refreshSidebar",
+    "onCommand:yarn-script.searchInSidebar",
+    "onCommand:yarn-script.showInstalledPackages",
+    "onCommand:yarn-script.installPackageFromSidebar",
+    "onCommand:yarn-script.installDevPackageFromSidebar",
+    "onCommand:yarn-script.uninstallPackageFromSidebar"
   ],
   "main": "./dist/extension",
   "contributes": {
@@ -377,7 +401,7 @@
   "devDependencies": {
     "@types/mocha": "^10.0.0",
     "@types/node": "^20.0.0",
-    "@types/vscode": "^1.58.1",
+    "@types/vscode": "^1.99.1",
     "@typescript-eslint/eslint-plugin": "^5.12.0",
     "@typescript-eslint/parser": "^5.12.0",
     "eslint": "^8.0.0",
