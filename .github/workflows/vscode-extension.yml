@@ -82,7 +82,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.VSCODE_TOKEN }}
 
       - name: Setup Git
         run: |
@@ -94,6 +94,7 @@ jobs:
         uses: TriPSs/conventional-changelog-action@v6
         with:
           release-count: "0"
+          github-token: ${{ secrets.VSCODE_TOKEN }}
 
       - name: Download VSIX package
         uses: actions/download-artifact@v4
@@ -114,4 +115,4 @@ jobs:
           name: ${{ steps.changelog.outputs.tag }}
           body: ${{ steps.changelog.outputs.clean_changelog }}
           files: ${{ steps.vsix-name.outputs.VSIX_NAME }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.VSCODE_TOKEN }}
