@@ -1,67 +1,39 @@
-## 2.2.0 - Unreleased
+# [2.3.0](https://github.com/gamunu/vscode-yarn/compare/v2.1.0...v2.3.0) (2025-04-10)
 
-* Add npm package search feature - search and install packages directly from VS Code
-* Add support for custom npm registries management
-* Add registry selection when installing packages
 
-## 2.1.0 - 21st of February, 2022
+### Bug Fixes
 
-* Add Explorer context menu submenus for additional Yarn commands.
-`Install Packages`, `Test`, `Build`, `Start`, `Run Script`, `Add & Save Package`, `Add & Save Dev Package`, `Remove Package`, `Publish`, `Outdated`
+* refactor code and fix lint errors ([544b8b8](https://github.com/gamunu/vscode-yarn/commit/544b8b862934ecaf663fc81f0612d857a2233295))
+* rename license file ([65121c6](https://github.com/gamunu/vscode-yarn/commit/65121c6a914d8d2ee5f592ca7b2395e61e726150))
 
-## 2.0.0 - 07th of August, 2021
 
-* Add WSL support
-* Add Multi-Workspace support
+### Features
 
-## 1.7.0 - 08th of December, 2019
+* Add GitHub Actions workflow for publishing to VSCode Marketplace ([84344be](https://github.com/gamunu/vscode-yarn/commit/84344bee4d318b3ca378128ed596ce9dea67be03))
+* Add outdated, remove and run commands to context menu ([f462f1e](https://github.com/gamunu/vscode-yarn/commit/f462f1e9b86deac48bef89366db8c4b0026a924c))
+* Add submenus for Yarn commands ([b60ee92](https://github.com/gamunu/vscode-yarn/commit/b60ee9270d4873957ed66f9b93bcfd606ded414a))
+* Add WSL and Multi-Workspace support ([3a640fa](https://github.com/gamunu/vscode-yarn/commit/3a640faed16f588ed612ecb80798fac915888281))
+* Implement Yarn sidebar with npm package search and registry management ([#57](https://github.com/gamunu/vscode-yarn/issues/57)) ([219b525](https://github.com/gamunu/vscode-yarn/commit/219b525ee0a6b5744f7a09e390a6d015d158b131))
 
-* Fix for [Issue 11](https://github.com/gamunu/vscode-yarn/issues/11)
-* Add touchbar assets and update package.json.
-touchbar support includes:
-   - yarn run test
-   - yarn install
-   - yarn run build
-   - yarn run start
-* New workspace setting `config.yarn.enableTouchbar` to
-enable touchbar support.
-* `run.runInTerminal` is now default to true.
-* Add typings for tree-kill package
-* Add new line before EOF in all ts files.
-* Add webpack package build
 
-## 1.6 - 26th February, 2018
 
-* Fix for [Issue 9](https://github.com/gamunu/vscode-yarn/issues/9)
-* Fix for [Issue 8](https://github.com/gamunu/vscode-yarn/issues/8)
-* Fixed the bug context menu not correctly picking up the package.json file
+# [1.7.0](https://github.com/gamunu/vscode-yarn/compare/v1.6.0...v1.7.0) (2019-12-07)
 
-## 1.5 - 03rd February, 2018
 
-* Explorer context menu for installing packages.
-* Default behavior changed to keep the output window open after executing a command. yarn.dontHideOutputOnSuccess (default true)
-* Fix for [Issue 7](https://github.com/gamunu/vscode-yarn/issues/7)
 
-## 1.4.0 - 12th November, 2017
+# [1.6.0](https://github.com/gamunu/vscode-yarn/compare/v1.5.0...v1.6.0) (2018-02-26)
 
-* New workspace settings
-  * yarn.dontHideOutputOnSuccess (default false) Keep the output panel visible when yarn execution is successful (no effect with runInTerminal)
 
-## 1.3.0 - 11th September, 2017
 
-* New workspace settings
-  * yarn.packageJson (default "") specify a default package json file path. relative to current project root.
+# [1.4.0](https://github.com/gamunu/vscode-yarn/compare/v1.3.0...v1.4.0) (2018-01-24)
 
-## 1.2.0 - 11th May, 2017
 
-* Two new workspace settings
-  * yarn.runInTerminal (default false), this will execute commands in a terminal window.
-  * yarn.bin (default env Yarn bin path), this can be used to set a custom Yarn location.
 
-## 1.1.0 - 12th April, 2017
+# [1.3.0](https://github.com/gamunu/vscode-yarn/compare/v1.1.0...v1.3.0) (2017-09-20)
 
-* Changed yarn commands execution behavior,
-Fix for [Issue 1](https://github.com/gamunu/vscode-yarn/issues/1)
 
-01. If a package.json is opened as an active editor yarn will be invoked on it.
-02. If the above scenario fails to satisfy fallback to package.json in project root folder.
+
+# 1.0.0 (2017-03-10)
+
+
+
