@@ -2,11 +2,12 @@
   "name": "vscode-yarn",
   "displayName": "yarn",
   "description": "Yarn commands for VSCode",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "publisher": "gamunu",
   "icon": "yarn_icon.png",
   "engines": {
-    "vscode": "^1.58.1"
+    "vscode": "^1.99.1",
+    "node": ">=18.0.0"
   },
   "categories": [
     "Other"
@@ -38,10 +39,46 @@
     "onCommand:yarn-script.terminate",
     "onCommand:yarn-script.start",
     "onCommand:yarn-script.build",
-    "onCommand:yarn-script.test"
+    "onCommand:yarn-script.test",
+    "onCommand:yarn-script.searchPackages",
+    "onCommand:yarn-script.refreshSidebar",
+    "onCommand:yarn-script.searchInSidebar",
+    "onCommand:yarn-script.showInstalledPackages",
+    "onCommand:yarn-script.installPackageFromSidebar",
+    "onCommand:yarn-script.installDevPackageFromSidebar",
+    "onCommand:yarn-script.uninstallPackageFromSidebar"
   ],
   "main": "./dist/extension",
   "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "yarn-sidebar",
+          "title": "Yarn",
+          "icon": "./assets/yarn-icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "yarn-sidebar": [
+        {
+          "id": "yarnSidebar",
+          "name": "Search Packages",
+          "icon": "./assets/install.png"
+        },
+        {
+          "id": "package-dependencies",
+          "name": "Dependencies",
+          "icon": "./assets/install.png"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "yarnSidebar",
+        "contents": "No search results yet. Use the search box above to find npm packages.\n[Learn More](https://github.com/gamunu/vscode-yarn/blob/master/README.md)"
+      }
+    ],
     "commands": [
       {
         "command": "yarn-script.start",
@@ -116,6 +153,47 @@
         "command": "yarn-script.raw",
         "title": "Raw Command",
         "category": "Yarn"
+      },
+      {
+        "command": "yarn-script.searchPackages",
+        "title": "Search Packages",
+        "category": "Yarn"
+      },
+      {
+        "command": "yarn-script.refreshSidebar",
+        "title": "Refresh Yarn Sidebar",
+        "category": "Yarn",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "yarn-script.searchInSidebar",
+        "title": "Search Packages in Sidebar",
+        "category": "Yarn",
+        "icon": "$(search)"
+      },
+      {
+        "command": "yarn-script.showInstalledPackages",
+        "title": "Show Installed Packages",
+        "category": "Yarn",
+        "icon": "$(package)"
+      },
+      {
+        "command": "yarn-script.installPackageFromSidebar",
+        "title": "Install Package",
+        "category": "Yarn",
+        "icon": "$(cloud-download)"
+      },
+      {
+        "command": "yarn-script.installDevPackageFromSidebar",
+        "title": "Install as Dev Dependency",
+        "category": "Yarn",
+        "icon": "$(tools)"
+      },
+      {
+        "command": "yarn-script.uninstallPackageFromSidebar",
+        "title": "Uninstall Package",
+        "category": "Yarn",
+        "icon": "$(trash)"
       }
     ],
     "menus": {
@@ -176,6 +254,45 @@
           "command": "yarn-script.outdated",
           "group": "navigation@10",
           "submenu": "vscode.yarn"
+        },
+        {
+          "command": "yarn-script.searchPackages",
+          "group": "navigation@11",
+          "submenu": "vscode.yarn"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "yarn-script.refreshSidebar",
+          "when": "view == yarnSidebar",
+          "group": "navigation"
+        },
+        {
+          "command": "yarn-script.searchInSidebar",
+          "when": "view == yarnSidebar",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "yarn-script.searchInSidebar",
+          "when": "viewItem == search-box",
+          "group": "inline"
+        },
+        {
+          "command": "yarn-script.installPackageFromSidebar",
+          "when": "viewItem == package",
+          "group": "inline@1"
+        },
+        {
+          "command": "yarn-script.installDevPackageFromSidebar",
+          "when": "viewItem == package",
+          "group": "inline@2"
+        },
+        {
+          "command": "yarn-script.uninstallPackageFromSidebar",
+          "when": "viewItem == installed-package || viewItem == installed-dev-package",
+          "group": "inline"
         }
       ],
       "touchBar": [
@@ -197,6 +314,11 @@
         {
           "command": "yarn-script.start",
           "group": "navigation@+2",
+          "when": "config.yarn.enableTouchbar"
+        },
+        {
+          "command": "yarn-script.searchInSidebar",
+          "group": "navigation@+5",
           "when": "config.yarn.enableTouchbar"
         }
       ]
@@ -278,8 +400,8 @@
   },
   "devDependencies": {
     "@types/mocha": "^10.0.0",
-    "@types/node": "^18.0.0",
-    "@types/vscode": "^1.58.1",
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.99.1",
     "@typescript-eslint/eslint-plugin": "^5.12.0",
     "@typescript-eslint/parser": "^5.12.0",
     "eslint": "^8.0.0",
@@ -291,6 +413,8 @@
   "dependencies": {
     "global": "^4.3.2",
     "run-in-terminal": "^0.0.3",
-    "tree-kill": "^1.2.2"
-  }
+    "tree-kill": "^1.2.2",
+    "node-fetch": "^2.6.7"
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }

@@ -63,6 +63,8 @@ git clone git@github.com:gamunu/vscode-yarn.git gamunu.vscode-yarn
 * `yarn build`
 * `yarn publish [tag]`
 * `yarn run <script>`
+* `Search Packages` (Search npm registry for packages)
+* `Manage Registries` (Add/remove custom npm registries)
 
  Not happy with the available commands ? No problem, `raw command` is also available. Enter any yarn command you want.
 
@@ -83,6 +85,25 @@ Support for Macbook Pro Touch Bar. Following yarn commands are available:
 
 ![touch bar support](images/touchbar.png)
 
+### Yarn Sidebar
+
+The extension provides a dedicated sidebar in VS Code's activity bar to easily manage yarn commands, packages, and npm registries:
+
+- **Search Packages**: Quickly search for npm packages to install directly from the sidebar
+- **Installed Packages**: View and manage packages installed in your project
+- **Manage Registries**: View, add, or remove custom npm registries
+
+To access the sidebar, click on the Yarn icon in the VS Code activity bar.
+
+#### Package Management in Sidebar
+
+The sidebar offers a new way to manage your packages:
+
+- **Search Results**: When you search for packages, results appear directly in the sidebar
+- **Install Actions**: For non-installed packages, you can install them as regular or dev dependencies with one click
+- **Uninstall**: For installed packages, easily uninstall them with a single click
+- **Dependencies View**: Browse your project's dependencies and dev dependencies separately
+
 ### Run last executed script
 
 You can also run the last executed script by typing `yarn run last...`.
@@ -98,6 +119,23 @@ It has different behaviors on Unix or Windows.
 02. If the package.json is explicitly defined in the configuration yarn will invoke on it.
 02. If above scenarios fail to satisfy. The extension will fallback to package.json in project root folder.
 
+### Package search and custom registries
+
+You can search for npm packages directly from VS Code and install them with yarn:
+
+1. Open the command palette (Ctrl+Shift+P or Cmd+Shift+P on macOS)
+2. Type "Yarn: Search Packages"
+3. Enter your search term
+4. Select a package from the results to install it
+
+You can also add and manage custom npm registries:
+
+1. Open the command palette (Ctrl+Shift+P or Cmd+Shift+P on macOS)
+2. Type "Yarn: Manage Registries"
+3. Choose to add a new registry or view/remove existing ones
+
+When searching for packages or installing them, you'll have the option to specify which registry to use.
+
 ## Settings
 
 - `yarn.runInTerminal` Defines whether the command is run in a terminal window or whether the output form the command is shown in the `Output` window. The default is to show the output in the output window.
@@ -109,13 +147,18 @@ It has different behaviors on Unix or Windows.
    - yarn run build
    - yarn run test
    - yarn run start
+- `yarn.customRegistries` List of custom npm registries to use for package search and installation.
 
 ##### Example
 ```javascript
 {
   "yarn.runInTerminal": false,
-  "yarn.dontHideOutputOnSuccess": false
-  "yarn.packageJson": "src/package.json"
+  "yarn.dontHideOutputOnSuccess": false,
+  "yarn.packageJson": "src/package.json",
+  "yarn.customRegistries": [
+    "https://registry.yarnpkg.com",
+    "https://npm.example.com"
+  ]
 }
 ```
 

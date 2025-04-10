@@ -1,4 +1,4 @@
-import { commands as Commands, ExtensionContext } from 'vscode';
+import { commands as Commands, ExtensionContext} from 'vscode';
 import { outputChannel } from './output';
 import { terminal } from './run-command';
 import yarnInit from './init';
@@ -10,6 +10,9 @@ import { yarnPublish } from './publish';
 import { yarnRawCommand } from './raw';
 import yarnTerminate from './terminate';
 import { yarnOutdated } from './outdated';
+import { yarnSearchPackages } from './search';
+import { registerYarnSidebar } from './views/yarnSidebarProvider';
+import { YarnSearchProvider, YarnDependenciesProvider } from './views/yarnSidebarProvider';
 
 /**
  * Activate the extension and register all commands and events
@@ -17,6 +20,13 @@ import { yarnOutdated } from './outdated';
  * @param context ExtensionContext
  */
 export const activate = function (context: ExtensionContext) {
+	// Register the sidebar view
+	registerYarnSidebar(context);
+
+	// Note: The sidebar-specific commands (addRegistryFromSidebar, removeRegistryFromSidebar, etc.)
+	// are registered in the registerYarnSidebar function directly to avoid duplication
+	const dependenciesProvider = new YarnDependenciesProvider();
+
 	const disposables = [
 		Commands.registerCommand('yarn-script.installPackages', yarnInstallPackages),
 		Commands.registerCommand('yarn-script.addPackages', yarnAddPackages),
@@ -32,7 +42,15 @@ export const activate = function (context: ExtensionContext) {
 		Commands.registerCommand('yarn-script.raw', yarnRawCommand),
 		Commands.registerCommand('yarn-script.terminate', yarnTerminate),
 		Commands.registerCommand('yarn-script.test', yarnTest),
-		Commands.registerCommand('yarn-script.start', yarnStart)
+		Commands.registerCommand('yarn-script.start', yarnStart),
+		Commands.registerCommand('yarn-script.searchPackages', yarnSearchPackages),
+		Commands.registerCommand('yarn-search-box.focus', () => {
+			const searchProvider = new YarnSearchProvider();
+			searchProvider._showSearchBox();
+		}),
+		Commands.registerCommand('yarn-script.refreshDependencies', () => {
+			dependenciesProvider.refreshDependencies();
+		})
 	];
 
 	context.subscriptions.push(...disposables, outputChannel);

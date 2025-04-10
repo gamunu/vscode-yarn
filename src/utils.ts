@@ -8,16 +8,24 @@ interface PackageJsonRoot {
 	name: string;
 }
 
+let cachedPackageJsonPath: string | null = null;
+
 /**
  * Read scripts from package.json file and return them as an object
  *
  * @returns object
  */
 export async function pickPackageJson(): Promise<Readonly<string>> {
+	// If we have already cached a package.json path, return it
+	if (cachedPackageJsonPath) {
+		return cachedPackageJsonPath;
+	}
+
 	// if active text editor is a package.json turn the path for it
 	const editor = Window.activeTextEditor;
 	if (editor && editor.document.fileName.match("package.json")) {
-		return editor.document.fileName;
+		cachedPackageJsonPath = editor.document.fileName;
+		return cachedPackageJsonPath;
 	}
 
 	const workspaceFolders = Workspace.workspaceFolders;
@@ -47,9 +55,11 @@ export async function pickPackageJson(): Promise<Readonly<string>> {
 				Messages.noValueError();
 				return undefined;
 			}
-			return nodeWorkspaces.filter(w => w.name === item.label)[0].fsPath;
+			cachedPackageJsonPath = nodeWorkspaces.filter(w => w.name === item.label)[0].fsPath;
+			return cachedPackageJsonPath;
 		} else if (nodeWorkspaces.length === 1) {
-			return nodeWorkspaces[0].fsPath;
+			cachedPackageJsonPath = nodeWorkspaces[0].fsPath;
+			return cachedPackageJsonPath;
 		}
 	}
 	return undefined;
@@ -121,4 +131,84 @@ export function getYarnBin() {
  */
 export function dontHideOutputOnSuccess() {
 	return Workspace.getConfiguration('yarn')['dontHideOutputOnSuccess'];
+}
+
+/**
+ * Get installed dependencies from package.json
+ *
+ * @param packageJsonPath path to package.json file
+ * @returns object with dependencies and devDependencies
+ */
+export function getInstalledDependencies(packageJsonPath: string) {
+	try {
+		const content = Fs.readFileSync(packageJsonPath).toString();
+		const json = JSON.parse(content);
+		return {
+			dependencies: json.dependencies || {},
+			devDependencies: json.devDependencies || {}
+		};
+	} catch (error) {
+		console.error('Error reading dependencies:', error);
+		return { dependencies: {}, devDependencies: {} };
+	}
+}
+
+/**
+ * Perform an npm search with a cooldown to avoid rate limits.
+ *
+ * @param searchTerm string term to search for
+ * @param currentPackageJson string | null current package.json file path
+ * @param searchCooldown number cooldown time in milliseconds
+ * @param lastSearchTime number timestamp of the last search
+ * @returns Promise<{ results: any[], updatedLastSearchTime: number }>
+ */
+export async function performNpmSearch(searchTerm: string, currentPackageJson: string | null, searchCooldown: number, lastSearchTime: number): Promise<{ results: any[]; updatedLastSearchTime: number }> {
+	const now = Date.now();
+	const timeSinceLastSearch = now - lastSearchTime;
+
+	if (timeSinceLastSearch < searchCooldown) {
+		const remainingCooldown = Math.ceil((searchCooldown - timeSinceLastSearch) / 1000);
+		throw new Error(`Please wait ${remainingCooldown} seconds before searching again to avoid rate limits.`);
+	}
+
+	if (!currentPackageJson) {
+		throw new Error('No package.json selected. Please select a package.json file.');
+	}
+
+	const defaultRegistry = 'https://registry.npmjs.org/-/v1/search';
+	const results = await searchNpmPackages(defaultRegistry, searchTerm);
+
+	if (results.length === 0) {
+		throw new Error(`No packages found for "${searchTerm}"`);
+	}
+
+	return { results, updatedLastSearchTime: now };
+}
+
+/**
+ * Search for npm packages using the registry and term.
+ *
+ * @param registry string registry URL
+ * @param term string search term
+ * @returns Promise<{ name: string; description: string; version: string }[]>
+ */
+export async function searchNpmPackages(registry: string, term: string): Promise<{ name: string; description: string; version: string }[]> {
+	const searchUrl = `${registry}/-/v1/search?text=${encodeURIComponent(term)}&size=20`;
+	const response = await fetch(searchUrl, {
+		headers: {
+			'Accept': 'application/json',
+			'User-Agent': 'vscode-yarn-extension'
+		}
+	});
+
+	if (!response.ok) {
+		throw new Error(`Failed to fetch search results: ${response.statusText}`);
+	}
+
+	const data = (await response.json()) as { objects: any[] };
+	return data.objects.map((obj) => ({
+		name: obj.package.name,
+		description: obj.package.description || 'No description available',
+		version: obj.package.version
+	}));
 }
