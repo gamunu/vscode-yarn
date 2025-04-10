@@ -13,7 +13,6 @@ export class YarnSearchProvider implements vscode.TreeDataProvider<YarnTreeItem>
 
     private _searchResults: any[] = [];
     public _currentPackageJson: string | null = null;
-    private _searchTerm: string = '';
     private _lastSearchTime: number = 0;
     private _searchCooldown: number = 3000; // 3 seconds cooldown between searches
     public searchInputBox: vscode.InputBox | undefined;
@@ -96,7 +95,6 @@ export class YarnSearchProvider implements vscode.TreeDataProvider<YarnTreeItem>
         }
 
         // Update search tracking variables
-        this._searchTerm = searchTerm;
         this._lastSearchTime = now;
 
         // Get current package.json
@@ -407,18 +405,6 @@ export class YarnTreeItem extends vscode.TreeItem {
             this.iconPath = new vscode.ThemeIcon('dependency'); // Icon for regular dependencies
         }
     }
-}
-
-/**
- * Function to get a random nonce string
- */
-function getNonce() {
-    let text = '';
-    const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    for (let i = 0; i < 32; i++) {
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
-    return text;
 }
 
 /**

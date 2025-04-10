@@ -1,4 +1,4 @@
-import { commands as Commands, ExtensionContext, window as Window, workspace as Workspace } from 'vscode';
+import { commands as Commands, ExtensionContext} from 'vscode';
 import { outputChannel } from './output';
 import { terminal } from './run-command';
 import yarnInit from './init';
