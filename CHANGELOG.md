@@ -1,3 +1,9 @@
+## 2.2.0 - Unreleased
+
+* Add npm package search feature - search and install packages directly from VS Code
+* Add support for custom npm registries management
+* Add registry selection when installing packages
+
 ## 2.1.0 - 21st of February, 2022
 
 * Add Explorer context menu submenus for additional Yarn commands.

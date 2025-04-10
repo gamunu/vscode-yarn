@@ -47,3 +47,27 @@ export function noValueError() {
 export function invalidTagError() {
 	Window.showErrorMessage('Tag is invalid');
 }
+
+export function searchError(error: string) {
+	if (error.includes('Too Many Requests') || error.includes('429')) {
+		Window.showErrorMessage('Rate limit exceeded. The npm registry is temporarily limiting requests. Please try again in a few moments.');
+	} else {
+		Window.showErrorMessage(`Error searching packages: ${error}`);
+	}
+}
+
+export function noPackagesFound(term: string) {
+	Window.showInformationMessage(`No packages found for "${term}"`);
+}
+
+export function registryAdded(registry: string) {
+	Window.showInformationMessage(`Added registry: ${registry}`);
+}
+
+export function registryRemoved(registry: string) {
+	Window.showInformationMessage(`Removed registry: ${registry}`);
+}
+
+export function noRegistriesConfigured() {
+	Window.showInformationMessage('No custom registries configured');
+}
