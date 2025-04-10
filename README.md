@@ -1,10 +1,10 @@
 <p align="center">
   <img src="https://raw.githubusercontent.com/gamunu/vscode-yarn/master/yarn_icon.png?raw=true" alt="vscode-yarn: VSCode extensions to manage yarn commands." width="150">
   <br>
-  <a href="https://github.com/gamunu/vscode-yarn/releases/latest"><img src="https://img.shields.io/github/release/gamunu/vscode-yarn.svg" alt="Releases"></a>
-  <a href="https://code.visualstudio.com/updates/v1_19"><img src="https://img.shields.io/badge/VS_Code-v1.19+-373277.svg"/></a>
-  <a href="https://marketplace.visualstudio.com/items?itemName=gamunu.vscode-yarn"><img src="https://vsmarketplacebadge.apphb.com/installs/gamunu.vscode-yarn.svg"/></a>
-  <a href="https://github.com/gamunu/vscode-yarn/issues"><img src="https://img.shields.io/github/issues/gamunu/vscode-yarn.svg" alt="Issues"></a>
+  <a href="https://github.com/gamunu/vscode-yarn/releases/latest"><img src="https://img.shields.io/github/release/gamunu/vscode-yarn.png" alt="Releases"></a>
+  <a href="https://code.visualstudio.com/updates/v1_19"><img src="https://img.shields.io/badge/VS_Code-v1.19+-373277.png"/></a>
+  <a href="https://marketplace.visualstudio.com/items?itemName=gamunu.vscode-yarn"><img src="https://img.shields.io/badge/Installs-5K%2B-brightgreen.png" alt="Installs"/></a>
+  <a href="https://github.com/gamunu/vscode-yarn/issues"><img src="https://img.shields.io/github/issues/gamunu/vscode-yarn.png" alt="Issues"></a>
 </p>
 <p align="center">VSCode-Yarn: VSCode extensions to manage yarn commands.</p>
 
@@ -53,26 +53,61 @@ git clone git@github.com:gamunu/vscode-yarn.git gamunu.vscode-yarn
 
 ### Commands
 
-* `yarn init`
-* `yarn install`
-* `yarn add`
-* `yarn add --dev`
-* `yarn remove <pkg>`
-* `yarn start`
-* `yarn test`
-* `yarn build`
-* `yarn publish [tag]`
-* `yarn run <script>`
-* `Search Packages` (Search npm registry for packages)
-* `Manage Registries` (Add/remove custom npm registries)
+* `yarn init` - Initialize a new yarn package
+* `yarn install` - Install all dependencies for a project
+* `yarn add` - Add a package to use in your current package
+* `yarn add --dev` - Add a package to the "devDependencies"
+* `yarn remove <pkg>` - Remove a package
+* `yarn start` - Run the "start" script defined in package.json
+* `yarn test` - Run the "test" script defined in package.json
+* `yarn build` - Run the "build" script defined in package.json
+* `yarn publish [tag]` - Publish a package to npm registry with optional tag
+* `yarn run <script>` - Run a defined package script
+* `Search Packages` - Search npm registry for packages with interactive installation
+* `Manage Registries` - Add/remove custom npm registries for package search
 
- Not happy with the available commands ? No problem, `raw command` is also available. Enter any yarn command you want.
+Not happy with the available commands? No problem, `raw command` is also available. Enter any yarn command you want.
 
 ### Explorer context menu
 
-Few `yarn` commands also available in the `package.json` file's explorer context menu.
+Yarn commands are available in the `package.json` file's explorer context menu for quick access.
 
 ![Context menu](images/context.png)
+
+### Yarn Sidebar
+
+The extension provides a dedicated sidebar in VS Code's activity bar for comprehensive yarn management:
+
+![Yarn Sidebar](https://raw.githubusercontent.com/gamunu/vscode-yarn/master/images/yarn-sidebar.png)
+
+#### Search Packages View
+
+The Search Packages view allows you to:
+
+- **Search for npm packages**: Enter a search term to find packages in the npm registry
+- **View search results directly**: See package names, descriptions, and versions
+- **Install with one click**: Install as regular or dev dependency with convenient buttons
+- **Rate limit protection**: Built-in cooldown system to avoid npm registry rate limits
+
+To search for packages:
+1. Click the Search icon in the sidebar title
+2. Enter your search term
+3. Press Enter to see results
+4. Use the inline buttons to install packages
+
+#### Dependencies View
+
+The Dependencies view provides:
+
+- **Visual organization**: Dependencies and DevDependencies in separate collapsible sections
+- **Version information**: See installed versions at a glance
+- **Quick uninstall**: Remove packages with one click
+- **Auto-refresh**: Automatically updates when dependencies change
+
+This view makes it easy to:
+- Monitor what packages are installed in your project
+- Quickly remove unnecessary dependencies
+- Distinguish between regular and development dependencies
 
 ### TouchBar support
 
@@ -85,25 +120,6 @@ Support for Macbook Pro Touch Bar. Following yarn commands are available:
 
 ![touch bar support](images/touchbar.png)
 
-### Yarn Sidebar
-
-The extension provides a dedicated sidebar in VS Code's activity bar to easily manage yarn commands, packages, and npm registries:
-
-- **Search Packages**: Quickly search for npm packages to install directly from the sidebar
-- **Installed Packages**: View and manage packages installed in your project
-- **Manage Registries**: View, add, or remove custom npm registries
-
-To access the sidebar, click on the Yarn icon in the VS Code activity bar.
-
-#### Package Management in Sidebar
-
-The sidebar offers a new way to manage your packages:
-
-- **Search Results**: When you search for packages, results appear directly in the sidebar
-- **Install Actions**: For non-installed packages, you can install them as regular or dev dependencies with one click
-- **Uninstall**: For installed packages, easily uninstall them with a single click
-- **Dependencies View**: Browse your project's dependencies and dev dependencies separately
-
 ### Run last executed script
 
 You can also run the last executed script by typing `yarn run last...`.
@@ -113,28 +129,43 @@ You can also run the last executed script by typing `yarn run last...`.
 You can terminate a script with the `terminate` command. It uses the `tree-kill` module that you can find on `yarn`.
 It has different behaviors on Unix or Windows.
 
+### Multi-workspace support
+
+The extension fully supports multi-root workspaces:
+
+- Choose which package.json to work with when multiple are available
+- Remember your selection for subsequent operations
+- Switch between different package.json files easily
+
 ### Order of execution of yarn commands
 
 01. If a package.json is opened as an active editor/focused tab yarn will be invoked on it.
 02. If the package.json is explicitly defined in the configuration yarn will invoke on it.
-02. If above scenarios fail to satisfy. The extension will fallback to package.json in project root folder.
+03. If above scenarios fail to satisfy. The extension will fallback to package.json in project root folder.
 
 ### Package search and custom registries
 
-You can search for npm packages directly from VS Code and install them with yarn:
+The extension offers an enhanced package search experience:
 
-1. Open the command palette (Ctrl+Shift+P or Cmd+Shift+P on macOS)
-2. Type "Yarn: Search Packages"
-3. Enter your search term
-4. Select a package from the results to install it
+#### Searching for packages
 
-You can also add and manage custom npm registries:
+There are multiple ways to search for packages:
 
-1. Open the command palette (Ctrl+Shift+P or Cmd+Shift+P on macOS)
-2. Type "Yarn: Manage Registries"
-3. Choose to add a new registry or view/remove existing ones
+1. **Via Command Palette**:
+   - Open the command palette (Ctrl+Shift+P or Cmd+Shift+P on macOS)
+   - Type "Yarn: Search Packages"
+   - Enter your search term
+   - Select a package to install
 
-When searching for packages or installing them, you'll have the option to specify which registry to use.
+2. **Via Yarn Sidebar**:
+   - Click the Yarn icon in the activity bar
+   - Click the search icon in the sidebar title bar
+   - Enter your search term
+   - Use the inline buttons to install packages
+
+3. **With Quick Pick**:
+   - When searching, you can choose to install as regular or dev dependency
+   - The quick pick shows package descriptions and versions
 
 ## Settings
 
@@ -147,18 +178,13 @@ When searching for packages or installing them, you'll have the option to specif
    - yarn run build
    - yarn run test
    - yarn run start
-- `yarn.customRegistries` List of custom npm registries to use for package search and installation.
 
 ##### Example
 ```javascript
 {
   "yarn.runInTerminal": false,
   "yarn.dontHideOutputOnSuccess": false,
-  "yarn.packageJson": "src/package.json",
-  "yarn.customRegistries": [
-    "https://registry.yarnpkg.com",
-    "https://npm.example.com"
-  ]
+  "yarn.packageJson": "src/package.json"
 }
 ```
 
@@ -166,8 +192,15 @@ When searching for packages or installing them, you'll have the option to specif
 
 The extension defines a chording keyboard shortcut for the `R` key. As a consequence an existing keybinding for `R` is not executed immediately. If this is not desired, then please bind another key for these commands, see the [customization](https://code.visualstudio.com/docs/customization/keybindings) documentation.
 
+| Shortcut (Windows/Linux) | Shortcut (macOS) | Command |
+|--------------------------|------------------|---------|
+| `Ctrl+R Shift+R`         | `Cmd+R Shift+R`  | Run Script |
+| `Ctrl+R R`               | `Cmd+R R`        | Run Last Script |
+| `Ctrl+R Shift+X`         | `Cmd+R Shift+X`  | Terminate Script |
+| `Ctrl+R T`               | `Cmd+R T`        | Run Test |
+
 ## Contribute
 
-Report a bug or a suggestion by posting an issue on the git repository (https://github.com/gamunu/vscode-yarn).
+Report a bug or a suggestion by posting an issue on the [GitHub repository](https://github.com/gamunu/vscode-yarn).
 
 vscode-yarn incorporates code modified from [fknop vscode-npm](https://github.com/fknop/vscode-npm).
