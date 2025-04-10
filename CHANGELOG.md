@@ -1,3 +1,12 @@
+## [2.3.1](https://github.com/gamunu/vscode-yarn/compare/v2.3.0...v2.3.1) (2025-04-10)
+
+
+### Bug Fixes
+
+* Update publish step to use MARKETPLACE_TOKEN for authentication ([23bf68e](https://github.com/gamunu/vscode-yarn/commit/23bf68e28ac4b4f633a8662eacd967f56fa31e4a))
+
+
+
 # [2.3.0](https://github.com/gamunu/vscode-yarn/compare/v2.1.0...v2.3.0) (2025-04-10)
 
 
