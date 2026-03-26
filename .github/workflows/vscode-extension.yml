@@ -67,7 +67,7 @@ jobs:
         run: echo "VSIX_NAME=$(ls *.vsix)" >> $GITHUB_OUTPUT
 
       - name: Upload VSIX artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: vsix-package
           path: ${{ steps.vsix-name.outputs.VSIX_NAME }}
@@ -97,7 +97,7 @@ jobs:
           github-token: ${{ secrets.VSCODE_TOKEN }}
 
       - name: Download VSIX package
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: vsix-package
           path: ./
